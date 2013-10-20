@@ -1,0 +1,99 @@
+// Place all the styles related to the destinations controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.content {
+  margin-left: -15px;
+  padding-right: 0;
+  margin-right: 0;
+}
+
+#notes_wrapper .span6 {
+  margin-left: 0px;
+}
+
+.span4 {
+  width: 335px;
+}
+
+.span9 {
+  width: 735px;
+}
+
+.table {
+  margin-left: 0px;
+}
+
+/*table*/
+
+#notes_length {
+  width: 155px;
+}
+
+.DTTT.btn-note {
+  margin-left: 5px;
+}
+
+.table tbody tr.active td,
+.table tbody tr.active th {
+  background-color: #B9E9BB;
+  color: #000000;
+}
+
+
+.table tbody tr.active:hover td,
+.table tbody tr.active:hover th {
+  background-color: #b9e9bb !important;
+}
+
+.table-striped tbody tr.active:nth-child(odd) td,
+.table-striped tbody tr.active:nth-child(odd) th {
+  background-color: #b9e9bb;
+}
+
+
+.dataTables_scroll {
+  margin-bottom: 8px;
+}
+
+.icon-edit {
+  margin-top: 5px;
+}
+
+.icon-remove {
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+.dataTables_filter input {
+  width: 75px
+}
+
+.dataTables_info {
+  margin-top: -3px;
+}
+
+
+.left-form {
+  margin-left: 5px;
+}
+
+.add-btn {
+  margin-top: 40px;
+}
+
+.well-form {
+  margin-top: 14px;
+  padding-left: 0px;
+}
+
+.message {
+  background-color: red;
+  border-bottom-right-radius: 5px 5px;
+  border-top-right-radius: 5px 5px;
+  padding: 2px 5px;
+  font-size: 0.8em;
+}
+
+div.field_with_errors div.ui-effects-wrapper {
+  display: inline-block !important;
+}

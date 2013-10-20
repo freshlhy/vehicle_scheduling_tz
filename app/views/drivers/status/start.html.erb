@@ -1,0 +1,30 @@
+<% provide(:title, '当前状态') %>
+
+<div class="content span9">
+  <h4>当前状态</h4>
+  <div class="row">
+    <div class="span9">
+      <% flash.each do |key, value| %>
+          <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+      <% end %>
+    </div>
+  </div>
+
+
+
+  <div class="form-horizontal">
+    <div class="control-group">
+      <label class="control-label">您没有当前出差的记录，现在出差？</label>
+      <div class="controls">
+        <%= link_to "添加出差记录", "/drivers/trips/new", class: "btn btn-primary" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">或者</label>
+      <div class="controls">
+        <%= link_to "查看出差记录", "/drivers/trips", class: "btn" %>
+      </div>
+    </div>
+  </div>
+
+</div>

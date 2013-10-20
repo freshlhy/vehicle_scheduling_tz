@@ -1,0 +1,153 @@
+#nav-content {
+  background: url(image_path('bg_main.png')) repeat-y 0 0;
+}
+
+.nav {
+  margin-bottom:25px;
+}
+
+.nav li {
+  margin-top: 5px;
+  margin-bottom: 8px;
+  padding-right: 25px;
+  list-style: none;
+  _height: 30px;
+  _overflow: hidden;
+  _margin-bottom: 0
+}
+
+.nav li i {
+  margin-right: 3px;
+}
+
+.nav > li > a:hover {
+  color: #000;
+  background: #b9e9bb;
+}
+
+.nav-header {
+  display: block;
+  padding: 3px 15px;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 20px;
+  color: #000;
+}
+
+.nav-list > .active > a,
+.nav-list > .active > a:hover {
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+  background-color: green;
+}
+
+.nav-list > li > a,
+.nav-list .nav-header {
+  padding: 3px 38px;
+}
+
+
+
+/* icons */
+[class^="cus-"],
+[class*=" cus-"] {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  *margin-right: .8em;
+  line-height: 20px;
+  vertical-align: text-top;
+  background-image: url(image_path('ico_nav.png'));
+  background-position: 16px 16px;
+  background-repeat: no-repeat;
+}
+[class^="cus-"]:last-child,
+[class*=" cus-"]:last-child {
+  *margin-left: 0;
+}
+
+/* icons code below */
+.cus-icon {
+  background-position: -20px 0;
+}
+
+.cus-icon1 {
+  background-position: -20px -20px;
+}
+
+.cus-icon2 {
+  background-position: -20px -40px;
+}
+
+.cus-icon2-white {
+  background-position: 0 -40px;
+}
+
+.cus-icon3 {
+  background-position: -20px -60px;
+}
+
+.cus-icon4 {
+  background-position: -20px -80px;
+}
+
+.cus-icon4-white {
+  background-position: 0 -80px;
+}
+
+.cus-icon5 {
+  background-position: -20px -100px;
+}
+
+.cus-icon5-white {
+  background-position: 0 -100px;
+}
+
+.cus-icon6 {
+  background-position: -20px -120px;
+}
+
+.cus-icon6-white {
+  background-position: 0 -120px;
+}
+
+.cus-icon7 {
+  background-position: -20px -140px;
+}
+
+.cus-icon7-white {
+  background-position: 0 -140px;
+}
+
+.cus-icon8 {
+  background-position: -20px -160px;
+}
+
+.cus-icon8-white {
+  background-position: 0 -160px;
+}
+
+.cus-icon9 {
+  background-position: -20px -180px;
+}
+
+.cus-icon9-white {
+  background-position: 0 -180px;
+}
+
+.cus-icon11 {
+  background-position: -20px -220px;
+}
+
+.cus-icon11-white {
+  background-position: 0 -220px;
+}
+
+.cus-icon12 {
+  background-position: -20px -240px;
+}
+
+.cus-icon12-white {
+  background-position: 0 -240px;
+}
+

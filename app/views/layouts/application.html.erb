@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+  <head>
+    <title><%= full_title(yield(:title)) %></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
+    <%= javascript_include_tag "application" %>
+    <%= render 'assets' %>
+    <%= csrf_meta_tags %>
+    <!--[if lt IE 9]>
+      <%= javascript_include_tag "html5" %>
+    <![endif]-->
+  </head>
+  <body>
+
+    <%= render 'header' %>
+
+    <%= render 'content' %>
+
+    <%= render 'footer' %>
+
+  </body>
+</html>

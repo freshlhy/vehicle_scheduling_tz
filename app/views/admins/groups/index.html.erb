@@ -1,0 +1,41 @@
+<% provide(:title, '班组管理') %>
+
+<div class="content span9">
+  <h4>班组管理 </h4>
+
+  <div class="row">
+    <div class="span9" id="alert-info">
+      <div id="alert-success"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span6">
+      <table id="groups" class="table table-bordered" cellpadding="0" cellspacing="0"
+             border="0" data-source="<%= admins_groups_url(format: "json") %>">
+        <thead>
+        <tr class="alert alert-success">
+          <th>班组名称</th>
+          <th>班组人数</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+    <div class="left-form span3">
+      <div class="row">
+        <div class="span1">
+          <p><%= link_to "新增", new_admins_group_path, class: "btn add-btn", id: "new_admins_group", remote: true %></p>
+
+          <p><%= link_to "修改", '#', class: "btn edit-btn", id: "edit_admins_group", remote: true %></p>
+
+          <p><%= link_to "删除", '#', class: "btn remove-btn", id: "delete_admins_group",
+                 :confirm => "确定要删除这个班组吗？", :method=>:delete, remote: true %></p>
+        </div>
+        <div class="span2" id="form-wapper">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

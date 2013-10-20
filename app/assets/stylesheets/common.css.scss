@@ -1,0 +1,82 @@
+@import "bootstrap-chosen";
+
+$grayMediumLight: #eaeaea;
+$gray: #555 !default;
+$grayLight: #999 !default;
+$grayDarker: #222 !default;
+
+body, a {
+  color: #000;
+  text-decoration: none;
+}
+
+#header {
+  height: 69px;
+  background: url(image_path('header.jpg')) no-repeat 20px 0;
+}
+
+
+/*left nav */
+.nav-right-top {
+  float: right;
+  list-style: none;
+  margin-top: 42px;
+  margin-right: 12px;
+}
+
+.nav-right-top li {
+  float: left;
+  margin-left: 10px;
+  color: #1F655A
+}
+
+.nav-right-top li  a {
+  font-size: 12px;
+  color: #1F655A;
+  text-decoration: none;
+}
+
+.nav-right-top li a:hover {
+  color: red;
+  text-decoration: none;
+}
+
+/* footer */
+
+#footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid $grayMediumLight;
+  color: $grayLight;
+  a {
+    color: $gray;
+    &:hover {
+      color: $grayDarker;
+    }
+  }
+  small {
+    float: left;
+  }
+  ul {
+    float: right;
+    list-style: none;
+    li {
+      float: left;
+      margin-left: 10px;
+    }
+    margin-left: -15px;
+  }
+}
+
+
+#error_explanation {
+  color:#f00;
+  ul {
+    list-style: none;
+    margin: 0 0 25px 170px;
+  }
+}
+
+
+
+

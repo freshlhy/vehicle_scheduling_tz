@@ -1,0 +1,36 @@
+<% provide(:title, "Edit user") %>
+
+
+<div class="span6 ">
+
+  <%= form_for @user, :as => :user, :url => '/users/'+@user.id.to_s, :method => :put,
+               :html => {:class => "form-horizontal"}  do |f| %>
+      <h4 class="title">更新用户设置</h4>
+      <%= render 'shared/error_messages' , object: f.object %>
+
+      <div class="control-group">
+        <label class="control-label" for="username">用户名</label>
+        <div class="controls">
+          <input type="text" id="username" placeholder="您的姓名" name="user[name]" value="<%= @user.name %>">
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="password">密码</label>
+        <div class="controls">
+          <input type="password" id="password" placeholder="默认六个零" name="user[password]">
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="password_confirmation">确认密码</label>
+        <div class="controls">
+          <input type="password" id="password_confirmation" name="user[password_confirmation]">
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="controls">
+          <%= f.submit "保存更改", class: "btn btn-primary" %>
+          <a href="<%= user_root %>" class="btn cancle">取消</a>
+        </div>
+      </div>
+  <% end %>
+</div>

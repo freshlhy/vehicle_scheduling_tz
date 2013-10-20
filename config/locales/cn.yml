@@ -1,0 +1,18 @@
+cn:
+  activerecord:
+    errors:
+      messages:
+        confirmation: "密码确认不一致"
+      models:
+        driver:
+          attributes:
+            password_confirmation:
+              blank: "请确认密码"
+        worker:
+          attributes:
+            password_confirmation:
+              blank: "请确认密码"
+        admin:
+          attributes:
+            password_confirmation:
+              blank: "请确认密码"

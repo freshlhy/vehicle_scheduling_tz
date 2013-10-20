@@ -1,0 +1,12 @@
+<div class="container">
+  <div id="header" class="row">
+    <div class="span12">
+      <ul class="nav-right-top">
+        <li><%= link_to current_user.name, user_root %>，您好！</li>
+        <li><%= link_to "首页", root_path %></li>
+        <li><%= link_to "设置", edit_user_path(current_user) %></li>
+        <li><%= link_to "注销", signout_path, method: "delete" %></li>
+      </ul>
+    </div>
+  </div>
+</div>
