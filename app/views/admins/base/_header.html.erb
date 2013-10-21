@@ -3,7 +3,7 @@
     <div class="span12">
       <ul class="nav-right-top">
         <li><small>管理员 </small><%= link_to current_user.name, user_root %><small>，您好！</small></li>
-        <li><%= link_to "首页", root_path %></li>
+        <li><%= link_to "首页", '/index' %></li>
         <li><%= link_to "设置", edit_user_path(current_user) %></li>
         <li><%= link_to "注销", signout_path, method: "delete" %></li>
       </ul>

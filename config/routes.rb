@@ -57,7 +57,10 @@ VehicleScheduling::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
 
   #static pages
-  root to:"index_page#index"
+  # root to:"index_page#index"
+  root to:"sessions#new"
+
+  match '/index', to:"index_page#index"
 
   match '/about', to:"static_pages#about"
 

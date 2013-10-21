@@ -2,6 +2,7 @@
 class SessionsController < ApplicationController
 
   def new
+    redirect_to user_root if signed_in?
   end
 
   def create
@@ -9,7 +10,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       sign_in user
       if current_user.is_a? Admin
-        redirect_back_or admins_trips_path
+        redirect_back_or '/index'
       elsif current_user.is_a? Driver
         if in_trip?(current_user)
           redirect_to '/drivers/tour'

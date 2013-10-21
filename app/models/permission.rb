@@ -1,6 +1,6 @@
 class Permission
   def initialize(current_user)
-    allow :index_page,   [:index]
+    
     allow :static_pages, [:about, :contact]
     allow :sessions,     [:new, :create, :destroy]
     allow :users,        [:edit, :update] do |edit_user|
@@ -23,6 +23,7 @@ class Permission
       allow :'workers/worker_history', [:index]
     end
     if current_user.is_a? Admin
+      allow :'index_page/index',               [:index]
       allow :'admins/trips',           [:index, :edit, :update, :destroy]
       allow :'admins/drivers_history', [:index, :edit, :update, :destroy]
       allow :'admins/workers_history', [:index, :edit, :update, :destroy]
