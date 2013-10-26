@@ -1,16 +1,16 @@
-<% provide(:title, '工作人员出差信息管理|信息编辑') %>
+<% provide(:title, '工作人员出车信息管理|信息编辑') %>
 
 <div class="content span9">
   <div class="row">
     <div class="span9">
-      <h4>工作人员出差管理 </h4>
+      <h4>工作人员出车管理 </h4>
     </div>
   </div>
   <div class="row">
     <div class="span1">
       <a href="/workers/trips" class="btn btn-mini">«返回</a>
     </div>
-    <div id="title" class="span8">出差信息编辑</div>
+    <div id="title" class="span8">出车信息编辑</div>
   </div>
   <div class="row">
     <div class="span9">
@@ -92,13 +92,13 @@
             </div>
           </div>
           <div class="control-group">
-            <label class="control-label" for="chzn-destination-select">出差地</label>
+            <label class="control-label" for="chzn-destination-select">出车地</label>
 
             <div class="controls">
               <div class="chosen">
                 <%= collection_select(:trip, :destination_id, Destination.all, :id, :name, {:include_blank => true},
                                       {:class => "chzn-select-deselect", :id => "chzn-destination-select",
-                                       :'data-placeholder' => "请选择出差地...", :name => "destination_id"}) %>
+                                       :'data-placeholder' => "请选择出车地...", :name => "destination_id"}) %>
                 </select>
               </div>
             </div>
@@ -132,7 +132,7 @@
               <div class="chosen">
                 <%= collection_select(:trip, :note_id, Note.all, :id, :name, {:include_blank => true},
                                       {:class => "chzn-select-deselect", :id => "chzn-note-select",
-                                       :'data-placeholder' => "请选择出差事由...", :name => "note_id"}) %>
+                                       :'data-placeholder' => "请选择出车事由...", :name => "note_id"}) %>
               </div>
             </div>
           </div>

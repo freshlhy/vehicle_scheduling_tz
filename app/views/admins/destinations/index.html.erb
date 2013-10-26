@@ -1,7 +1,7 @@
-<% provide(:title, '出差地管理') %>
+<% provide(:title, '出车地管理') %>
 
 <div class="content span9">
-  <h4>出差地管理 </h4>
+  <h4>出车地管理 </h4>
 
   <div class="row">
     <div class="span9" id="alert-info">
@@ -14,7 +14,7 @@
              border="0" data-source="<%= admins_destinations_url(format: "json") %>">
         <thead>
         <tr class="alert alert-success">
-          <th>出差地名称</th>
+          <th>出车地名称</th>
         </tr>
         </thead>
         <tbody>
@@ -29,7 +29,7 @@
           <p><%= link_to "修改", '#', class: "btn edit-btn", id: "edit_admins_destination", remote: true %></p>
 
           <p><%= link_to "删除", '#', class: "btn remove-btn", id: "delete_admins_destination",
-                 :confirm => "确定要删除这个出差地吗？", :method=>:delete, remote: true %></p>
+                 :confirm => "确定要删除这个出车地吗？", :method=>:delete, remote: true %></p>
         </div>
         <div class="span2" id="form-wapper">
 

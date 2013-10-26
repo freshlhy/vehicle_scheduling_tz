@@ -71,7 +71,7 @@ module Drivers
       @trip.ing = true
 
       #冲突解决
-      @trip.errors.add(:cars, "就在刚才，你选的车辆已被添加到新增出差记录（出差）了，概率很小哦~ 囧~~~ 选其它车吧。") if @trip.car.current_trip > 0
+      @trip.errors.add(:cars, "就在刚才，你选的车辆已被添加到新增出车记录（出车）了，概率很小哦~ 囧~~~ 选其它车吧。") if @trip.car.current_trip > 0
       workers_ids_.each { |wi|
         worker = Worker.find(wi)
         @trip.errors.add(:workers, "就在刚才，你选的工作人员" + worker.name + "被别人选了，概率很小哦~ 囧~~~ 选其它人吧。") if in_trip?(worker)
@@ -132,13 +132,13 @@ module Drivers
           drivership = Drivership.where(:car_id => params[:car_id],
                                         :driver_id => driver.id).first_or_create
           @trip.drivership_id = drivership.id
-          ##如果该出差还没结束 更新车辆和司机的出差状态
+          ##如果该出车还没结束 更新车辆和司机的出车状态
           if @trip.ing
             if params[:car_id] != car.id.to_s
               new_car = Car.find(params[:car_id])
               #冲突解决
               if new_car.current_trip > 0
-                @trip.errors.add(:cars, "就在刚才，你选的车辆已被添加到新增出差记录（出差）了，概率很小哦~ 囧~~~ 选其它车吧。")
+                @trip.errors.add(:cars, "就在刚才，你选的车辆已被添加到新增出车记录（出车）了，概率很小哦~ 囧~~~ 选其它车吧。")
               else
                 new_car.update_attribute(:current_trip, @trip.id)
                 car.update_attribute(:current_trip, 0)
@@ -148,9 +148,9 @@ module Drivers
         end
       end
 
-      #出差人员改动
+      #出车人员改动
       if params[:workers_ids_] and params[:workers_ids_].size
-        #修改出差人员
+        #修改出车人员
         origin_workers_ids = @trip.workers_ids.split(',')
         workers_ids_ = params[:workers_ids_]
         @trip.workers_ids = workers_ids_.join(',')
@@ -230,7 +230,7 @@ module Drivers
 
       respond_to do |format|
         format.html do
-          flash[:success] = "该出差记录已删除！"
+          flash[:success] = "该出车记录已删除！"
           sign_in(current_user)
           if ing
             redirect_to '/drivers/start'

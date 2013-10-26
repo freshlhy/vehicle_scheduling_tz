@@ -3,7 +3,7 @@ require 'date'
 
 namespace :db do
   desc "Fill database with sample data"
-  task populate: :environment do
+  task sample: :environment do
 
     admin = Admin.create!(name:     "admin",
                          password: "000000",

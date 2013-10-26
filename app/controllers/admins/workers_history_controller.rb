@@ -22,9 +22,9 @@ module Admins
 
       @trip = Trip.find(params[:id])
 
-      #出差人员改动
+      #出车人员改动
       if params[:workers_ids_] and params[:workers_ids_].size
-        #修改出差人员
+        #修改出车人员
         origin_workers_ids = @trip.workers_ids.split(',')
         workers_ids_ = params[:workers_ids_]
         @trip.workers_ids = workers_ids_.join(',')
@@ -79,7 +79,7 @@ module Admins
 
       respond_to do |format|
         format.html do
-          flash[:success] = "该出差记录已删除！"
+          flash[:success] = "该出车记录已删除！"
           redirect_to '/admins/workers-history'
         end
         format.json

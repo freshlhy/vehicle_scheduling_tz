@@ -41,7 +41,7 @@ module Drivers
             new_car = Car.find(params[:car_id])
             #冲突解决
             if new_car.current_trip > 0
-              @trip.errors.add(:cars, "就在刚才，你选的车辆已被添加到新增出差记录（出差）了，概率很小哦~ 囧~~~ 选其它车吧。")
+              @trip.errors.add(:cars, "就在刚才，你选的车辆已被添加到新增出车记录（出车）了，概率很小哦~ 囧~~~ 选其它车吧。")
             else
               new_car.update_attribute(:current_trip, @trip.id)
               car.update_attribute(:current_trip, 0)
@@ -52,9 +52,9 @@ module Drivers
 
       end
 
-      #出差人员改动
+      #出车人员改动
       if params[:workers_ids_] and params[:workers_ids_].size
-        #修改出差人员
+        #修改出车人员
         origin_workers_ids = @trip.workers_ids.split(',')
         workers_ids_ = params[:workers_ids_]
         @trip.workers_ids = workers_ids_.join(',')
@@ -95,7 +95,7 @@ module Drivers
       respond_to do |format|
         format.html do
           if params[:workers_ids_] and params[:workers_ids_].size and @trip.errors.empty? and @trip.save
-            #如果为出差结束 提交信息
+            #如果为出车结束 提交信息
             if params[:commit]
               @trip.ing = false
               @trip.car.update_attribute(:current_trip, 0)

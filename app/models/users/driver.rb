@@ -9,7 +9,7 @@ class Driver < User
   private
   def confirm_driver_not_in_trip
     unless self.driverships.empty?
-      errors.add(:base, "该司机有出差记录，无法删除！")
+      errors.add(:base, "该司机有出车记录，无法删除！")
       return false
     end
   end

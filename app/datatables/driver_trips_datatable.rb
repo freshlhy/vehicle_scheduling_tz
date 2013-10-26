@@ -34,7 +34,7 @@ class DriverTripsDatatable
           h(trip.note.name),
           link_to('<i class="icon-edit"></i>'.html_safe, '/drivers/trips/'+trip.id.to_s+'/edit')+
               link_to('<i class="icon-remove"></i>'.html_safe, '/drivers/trips/'+trip.id.to_s,
-                      :confirm => "确定要删除这条出差记录吗？", :method => :delete)
+                      :confirm => "确定要删除这条出车记录吗？", :method => :delete)
       ]
     end
   end

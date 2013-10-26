@@ -14,32 +14,6 @@ class CarsDatatable
         aaData: data
     }
 
-    #Jbuilder.encode do |json|
-    #{
-    #    sEcho: params[:sEcho].to_i,
-    #    iTotalRecords:3,
-    #    iTotalDisplayRecords:3,
-    #    aaData:[
-    #      {
-    #        DT_RowId:0,
-    #        model:"Trident",
-    #        plate:"Internet Explorer 4.0",
-    #        load_limit:"4"
-    #      },
-    #      {
-    #        DT_RowId:1,
-    #        model:"Trident",
-    #        plate:"Internet Explorer 5.0",
-    #        load_limit:"5"
-    #      },
-    #      {
-    #        DT_RowId:2,
-    #        model:"Trident",
-    #        plate:"Internet Explorer 5.5",
-    #        load_limit:"Win 95+",
-    #      }
-    #   ]
-    #}
   end
 
   private

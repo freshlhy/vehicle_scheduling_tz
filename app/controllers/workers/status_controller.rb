@@ -28,9 +28,9 @@ module Workers
 
       @trip = Trip.find(current_trip(current_user))
 
-      #出差人员改动
+      #出车人员改动
       if params[:workers_ids_] and params[:workers_ids_].size
-        #修改出差人员
+        #修改出车人员
         origin_workers_ids = @trip.workers_ids.split(',')
         workers_ids_ = params[:workers_ids_]
         @trip.workers_ids = workers_ids_.join(',')

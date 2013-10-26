@@ -32,7 +32,7 @@ class WorkersHistoryDatatable
           h(trip.note.name),
           link_to('<i class="icon-edit"></i>'.html_safe, './workers-history/'+trip.id.to_s+'/edit')+
               link_to('<i class="icon-remove"></i>'.html_safe, './workers-history/'+trip.id.to_s,
-                      :confirm => "删除这条出差记录将同时删除对应司机的记录，确定要删除吗？", :method => :delete)
+                      :confirm => "删除这条出车记录将同时删除对应司机的记录，确定要删除吗？", :method => :delete)
       ]
     end
   end
@@ -51,26 +51,29 @@ class WorkersHistoryDatatable
 
       trips = trips.where("
             workers_names like :search or
+            notes.name like :search or
+            destinations.name like :search or
             departure_time like :search or
             back_time like :search", search: "%#{params[:sSearch]}%")
 
     end
 
     trips
+
   end
 
   def fetch_trips_helper(sort_column, sort_direction)
 
     #默认按归来时间排序
-    trips = Trip.where(@query, @date_range_start, @date_range_end).order("back_time desc")
+    trips = Trip.includes(:destination, :note).where(@query, @date_range_start, @date_range_end)
+      .order("back_time desc")
 
     case sort_column
 
       when "departure_time", "back_time"
-        trips = Trip.where(@query, @date_range_start, @date_range_end).order("#{sort_column} #{sort_direction}")
+        trips = Trip.includes(:destination, :note).where(@query, @date_range_start, @date_range_end).order("#{sort_column} #{sort_direction}")
       when "note", "destination"
-        trips = Trip.joins("LEFT OUTER JOIN #{sort_column}s ON #{sort_column}s.id =
-                trips.#{sort_column}_id").where(@query, @date_range_start, @date_range_end).order("#{sort_column}s.name #{sort_direction}")
+        trips = Trip.includes(:destination, :note).where(@query, @date_range_start, @date_range_end).order("#{sort_column}s.name #{sort_direction}")
     end
 
     trips

@@ -12,7 +12,7 @@ class Note < ActiveRecord::Base
   private
   def confirm_not_in_trip
     unless self.trips.empty?
-      errors.add(:base, "该事由包含在出差记录中，无法删除！")
+      errors.add(:base, "该事由包含在出车记录中，无法删除！")
       return false
     end
   end

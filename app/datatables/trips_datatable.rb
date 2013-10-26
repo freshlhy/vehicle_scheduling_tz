@@ -30,7 +30,7 @@ class TripsDatatable
           h(trip.note.name),
           link_to('<i class="icon-edit"></i>'.html_safe, edit_admins_trip_path(trip))+
               link_to('<i class="icon-remove"></i>'.html_safe, admins_trip_path(trip),
-                      :confirm => "确定要删除这条出差记录吗？", :method => :delete)
+                      :confirm => "确定要删除这条出车记录吗？", :method => :delete)
       ]
     end
   end
@@ -45,12 +45,14 @@ class TripsDatatable
     trips = trips.page(page).per_page(per_page)
 
     if params[:sSearch].present?
-      trips = trips.includes(:destination, :note, :drivership => [:car, :driver]).where("
-            workers_names like :search or
-            notes.name like :search or
-            destinations.name like :search or
-            cars.plate like :search or
-            users.name like :search", search: "%#{params[:sSearch]}%")
+      trips = trips.where("
+        cars.plate like :search or
+        users.name like :search or
+        workers_names like :search or
+        destinations.name like :search or
+        departure_time like :search or
+        back_time like :search or
+        notes.name like :search", search: "%#{params[:sSearch]}%")
     end
 
     trips
@@ -60,23 +62,18 @@ class TripsDatatable
   def fetch_trips_helper(sort_column, sort_direction)
 
     #默认按归来时间排序
-    trips = Trip.where("departure_time > ?", Date.today.at_beginning_of_year()).order("back_time desc")
+    trips = Trip.includes(:destination, :note, :drivership => [:car, :driver]).where("departure_time > ?", Date.today.at_beginning_of_year()).order("back_time desc")
 
     case sort_column
 
       when "departure_time", "back_time"
-        trips = Trip.where("departure_time > ?", Date.today.at_beginning_of_year()).order("#{sort_column} #{sort_direction}")
+        trips = Trip.includes(:destination, :note, :drivership => [:car, :driver]).where("departure_time > ?", Date.today.at_beginning_of_year()).order("#{sort_column} #{sort_direction}")
       when "note", "destination"
-        trips = Trip.joins("LEFT OUTER JOIN #{sort_column}s ON #{sort_column}s.id =
-                trips.#{sort_column}_id").where("departure_time > ?", Date.today.at_beginning_of_year()).order("#{sort_column}s.name #{sort_direction}")
+        trips = Trip.includes(:destination, :note, :drivership => [:car, :driver]).where("departure_time > ?", Date.today.at_beginning_of_year()).order("#{sort_column}s.name #{sort_direction}")
       when "plate"
-        trips = Trip.joins("LEFT OUTER JOIN driverships ON driverships.id=
-                trips.drivership_id").joins("LEFT OUTER JOIN cars ON cars.id=
-                driverships.car_id").where("departure_time > ?", Date.today.at_beginning_of_year()).order("cars.plate #{sort_direction}")
+        trips = Trip.includes(:destination, :note, :drivership => [:car, :driver]).where("departure_time > ?", Date.today.at_beginning_of_year()).order("cars.plate #{sort_direction}")
       when "driver"
-        trips = Trip.joins("LEFT OUTER JOIN driverships ON driverships.id=
-                trips.drivership_id").joins("LEFT OUTER JOIN users ON users.id=
-                driverships.driver_id").where("departure_time > ?", Date.today.at_beginning_of_year()).order("users.name #{sort_direction}")
+        trips = Trip.includes(:destination, :note, :drivership => [:car, :driver]).where("departure_time > ?", Date.today.at_beginning_of_year()).order("users.name #{sort_direction}")
 
     end
 

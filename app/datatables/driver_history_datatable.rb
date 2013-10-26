@@ -8,7 +8,7 @@ class DriverHistoryDatatable
     @driver_id = driver.id
     @date_range_start = Date.today.years_ago(1).at_beginning_of_year()
     @date_range_end = Date.today.years_ago(1).end_of_year()
-    @query = "driver_id = ? AND departure_time >= ? AND departure_time <= ?"
+    @query = "driverships.driver_id = ? AND departure_time >= ? AND departure_time <= ?"
   end
 
   def as_json(options = {})
@@ -47,11 +47,14 @@ class DriverHistoryDatatable
     trips = trips.page(page).per_page(per_page)
 
     if params[:sSearch].present?
-
       trips = trips.where("
-            departure_time like :search or
-            back_time like :search", search: "%#{params[:sSearch]}%")
-
+        cars.plate like :search or
+        users.name like :search or
+        workers_names like :search or
+        destinations.name like :search or
+        departure_time like :search or
+        back_time like :search or
+        notes.name like :search", search: "%#{params[:sSearch]}%")
     end
 
     trips
@@ -61,26 +64,18 @@ class DriverHistoryDatatable
   def fetch_trips_helper(sort_column, sort_direction)
 
     #默认按归来时间排序
-    trips = Trip.joins("LEFT OUTER JOIN driverships ON driverships.id=
-                trips.drivership_id").where(@query, @driver_id, @date_range_start, @date_range_end).order("back_time desc")
+    trips = Trip.includes(:destination, :note, :drivership => [:car, :driver]).where(@query, @driver_id, @date_range_start, @date_range_end).order("back_time desc")
 
     case sort_column
 
       when "departure_time", "back_time"
-        trips = Trip.joins("LEFT OUTER JOIN driverships ON driverships.id=
-                trips.drivership_id").where(@query, @driver_id, @date_range_start, @date_range_end).order("#{sort_column} #{sort_direction}")
+        trips = Trip.includes(:destination, :note, :drivership => [:car, :driver]).where(@query, @driver_id, @date_range_start, @date_range_end).order("#{sort_column} #{sort_direction}")
       when "note", "destination"
-        trips = Trip.joins("LEFT OUTER JOIN driverships ON driverships.id=
-                trips.drivership_id").joins("LEFT OUTER JOIN #{sort_column}s ON #{sort_column}s.id =
-                trips.#{sort_column}_id").where(@query, @driver_id, @date_range_start, @date_range_end).order("#{sort_column}s.name #{sort_direction}")
+        trips = Trip.includes(:destination, :note, :drivership => [:car, :driver]).where(@query, @driver_id, @date_range_start, @date_range_end).order("#{sort_column}s.name #{sort_direction}")
       when "plate"
-        trips = Trip.joins("LEFT OUTER JOIN driverships ON driverships.id=
-                trips.drivership_id").joins("LEFT OUTER JOIN cars ON cars.id=
-                driverships.car_id").where(@query, @driver_id, @date_range_start, @date_range_end).order("cars.plate #{sort_direction}")
+        trips = Trip.includes(:destination, :note, :drivership => [:car, :driver]).where(@query, @driver_id, @date_range_start, @date_range_end).order("cars.plate #{sort_direction}")
       when "driver"
-        trips = Trip.joins("LEFT OUTER JOIN driverships ON driverships.id=
-                trips.drivership_id").joins("LEFT OUTER JOIN users ON users.id=
-                driverships.driver_id").where(@query, @driver_id, @date_range_start, @date_range_end).order("users.name #{sort_direction}")
+        trips = Trip.includes(:destination, :note, :drivership => [:car, :driver]).where(@query, @driver_id, @date_range_start, @date_range_end).order("users.name #{sort_direction}")
 
     end
 

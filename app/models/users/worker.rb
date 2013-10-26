@@ -11,7 +11,7 @@ class Worker < User
   private
   def confirm_worker_has_no_trip
     unless self.workerships.empty?
-      errors.add(:base, "该司机有出差记录，无法删除！")
+      errors.add(:base, "该司机有出车记录，无法删除！")
       return false
     end
   end

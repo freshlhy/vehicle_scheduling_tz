@@ -11,7 +11,7 @@ class IndexPageController < ApplicationController
     @available_drivers = []
 
     cars.each { |car|
-      #该车已出差
+      #该车已出车
       if car.current_trip > 0
         @trip = Trip.find(car.current_trip)
 

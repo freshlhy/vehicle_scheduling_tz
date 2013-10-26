@@ -31,7 +31,7 @@ class DriversHistoryDatatable
           h(trip.back_time),
           link_to('<i class="icon-edit"></i>'.html_safe, './drivers-history/'+trip.id.to_s+'/edit')+
               link_to('<i class="icon-remove"></i>'.html_safe, './drivers-history/'+trip.id.to_s,
-                      :confirm => "删除这条出差记录将同时删除对应工作人员的记录，确定要删除吗？", :method => :delete)
+                      :confirm => "删除这条出车记录将同时删除对应工作人员的记录，确定要删除吗？", :method => :delete)
       ]
     end
   end

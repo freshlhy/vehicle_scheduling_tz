@@ -72,7 +72,7 @@ module Admins
 
       respond_to do |format|
         format.html do
-          flash[:success] = "该出差记录已删除！"
+          flash[:success] = "该出车记录已删除！"
           redirect_to admins_drivers_history_path
         end
         format.json

@@ -24,7 +24,7 @@ class Car < ActiveRecord::Base
   private
   def confirm_car_not_in_trip
     unless self.driverships.empty?
-      errors.add(:base, "该车有出差记录，无法删除！")
+      errors.add(:base, "该车有出车记录，无法删除！")
       return false
     end
   end
