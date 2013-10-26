@@ -22,6 +22,8 @@ class DriversDatatable
       {
           DT_RowId: driver.id, #行id
           name: h(driver.name),
+          gender: h(driver.gender),
+          licence_id: h(driver.licence_id),
           phone: h(driver.phone),
       }
     end
@@ -37,7 +39,7 @@ class DriversDatatable
     drivers = drivers.page(page).per_page(per_page)
 
     if params[:sSearch].present?
-      drivers = drivers.where("name like :search or phone like :search", search: "%#{params[:sSearch]}%")
+      drivers = drivers.where("name like :search", search: "%#{params[:sSearch]}%")
     end
 
     drivers
@@ -46,7 +48,7 @@ class DriversDatatable
 
   def fetch_drivers_helper(sort_column, sort_direction)
 
-    #默认按归来时间排序
+    #默认按姓名排序
     drivers = Driver.order("name asc")
 
     if sort_column and sort_column.size

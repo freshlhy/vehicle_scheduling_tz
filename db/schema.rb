@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121225024056) do
+ActiveRecord::Schema.define(:version => 20131026003926) do
 
   create_table "cars", :force => true do |t|
     t.string   "model"
@@ -82,6 +82,8 @@ ActiveRecord::Schema.define(:version => 20121225024056) do
     t.string   "phone"
     t.integer  "group_id"
     t.string   "type"
+    t.string   "gender"
+    t.string   "licence_id"
   end
 
   add_index "users", ["name"], :name => "index_users_on_name", :unique => true

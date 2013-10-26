@@ -1,7 +1,7 @@
 #encoding: utf-8
 class User < ActiveRecord::Base
 
-  attr_accessible :name, :phone, :group_id, :password, :password_confirmation, :remember_token, :current_trip
+  attr_accessible :name, :phone, :group_id, :password, :password_confirmation, :remember_token, :current_trip, :gender, :licence_id
   has_secure_password
 
   before_save :create_remember_token

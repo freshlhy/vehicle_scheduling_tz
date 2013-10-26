@@ -15,12 +15,14 @@ jQuery ->
     #"sDom": "<'span6'<'row'<'span3'l><'span1'r><'span2'f>>><'span6't><'span6'<'row'<'span3'i><'span3'p>>>"
     "sDom": "<'span6'<'row'<'span2'l><'span1'T><'span1'r><'span2'f>>><'span6't><'span6'<'row'<'span3'i><'span3'p>>>"
 
-    #首次打开默认以第六列排序
+    #首次打开默认以第1列排序
     "aaSorting": [[ 0, "asc" ]]
 
     "bAutoWidth": false
     "aoColumns": [
       { "mData": "name" },
+      { "mData": "gender" },
+      { "mData": "licence_id" },
       { "mData": "phone" },
     ]
     "oTableTools": {

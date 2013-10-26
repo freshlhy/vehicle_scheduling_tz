@@ -20,6 +20,8 @@ module Admins
         @driver.update_attributes(params[:driver])
       else
         @driver.update_attribute(:name, params[:driver][:name])
+        @driver.update_attribute(:gender, params[:driver][:gender])
+        @driver.update_attribute(:licence_id, params[:driver][:licence_id])
         @driver.update_attribute(:phone, params[:driver][:phone])
       end
 
