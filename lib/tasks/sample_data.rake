@@ -668,602 +668,93 @@ namespace :db do
                               password_confirmation:"000000")
 
 
+    # #司机和车辆配对
+    (1..50).each do |item|
+      Drivership.create!(car_id: rand(1..16), driver_id: rand(113..131))
+    end
+
+    # #测试数据
+
+    # 2012年历史出车数据
+    (1..100).each do |i|
+      dt = Date.new(2012,1,1) + (365*rand())
+      bt = dt + rand(1..5)
+      Trip.create!(drivership_id: rand(1..50),
+                    destination_id: rand(1..16),
+                    departure_time: dt,
+                    back_time: bt,
+                    note_id: rand(1..5))
+
+      (1..rand(2..5)).each do |k|
+        Workership.create!(trip_id: i, worker_id: rand(2..112))
+      end
+
+    end
+
+    # 2013年历史出车数据
+    days = Date.today.mjd - Date.new(2013,1,1).mjd
+    (1..100).each do |i|
+      dt = Date.new(2013,1,1) + ((days -6)*rand())
+      bt = dt + rand(1..5)
+      Trip.create!(drivership_id: rand(1..50),
+                    destination_id: rand(1..16),
+                    departure_time: dt,
+                    back_time: bt,
+                    note_id: rand(1..5))
+
+      (1..rand(2..5)).each do |k|
+        Workership.create!(trip_id: i+100, worker_id: rand(2..112))
+      end
+
+    end
+
+    # 出车中
+    days = Date.today.mjd - Date.new(2013,1,1).mjd
+    (1..rand(10..12)).each do |i|
+      dt = Date.new(2013,1,1) + ((days -6)*rand())
+      bt = dt + rand(1..5)
+
+      kdays = rand(0..5)   
+      bt = Date.today + kdays
+      dt = bt - rand(kdays..(kdays + 5))
+      r_drivership_id = rand(1..50)
+
+      trip = Trip.create!(drivership_id: r_drivership_id,
+                    destination_id: rand(1..16),
+                    departure_time: dt,
+                    back_time: bt,
+                    note_id: rand(1..5),
+                    ing: true)
+
+      # 200为历史出车数
+      current_trip_id = i + 200
+
+      drivership = Drivership.find(r_drivership_id)
+      car = drivership.car
+      driver = drivership.driver
+
+      if TripUser.exists?(:user_id => driver.id)
+        trip.destroy
+        next
+      end
+
+      car.current_trip = current_trip_id
+      car.save
+
+      TripUser.create!(user_id:driver.id, trip_id: current_trip_id)
+
+      (1..rand(3..5)).each do |k|
+        r_worker_id = rand(2..112)
+        workership = Workership.create!(trip_id: current_trip_id, worker_id: r_worker_id)
+        if TripUser.exists?(:user_id => r_worker_id)
+          workership.destroy
+          next
+        end
+        TripUser.create!(user_id:r_worker_id, trip_id: current_trip_id)
+      end
+
+    end
 
-    ds1 = Drivership.create!(car_id:    car1.id,
-                             driver_id: driver1.id)
-    ds2 = Drivership.create!(car_id:    car2.id,
-                             driver_id: driver2.id)
-    ds3 = Drivership.create!(car_id:    car3.id,
-                             driver_id: driver3.id)
-    ds4 = Drivership.create!(car_id:    car4.id,
-                             driver_id: driver4.id)
-    ds5 = Drivership.create!(car_id:    car5.id,
-                             driver_id: driver5.id)
-    ds6 = Drivership.create!(car_id:    car6.id,
-                             driver_id: driver6.id)
-    ds7 = Drivership.create!(car_id:    car7.id,
-                             driver_id: driver7.id)
-
-
-    ds8 = Drivership.create!(car_id:    car8.id,
-                             driver_id: driver11.id)
-    ds9 = Drivership.create!(car_id:    car9.id,
-                             driver_id: driver12.id)
-    ds10 = Drivership.create!(car_id:    car10.id,
-                             driver_id: driver13.id)
-    ds11 = Drivership.create!(car_id:    car11.id,
-                             driver_id: driver14.id)
-    ds12 = Drivership.create!(car_id:    car12.id,
-                             driver_id: driver15.id)
-    ds13 = Drivership.create!(car_id:    car13.id,
-                             driver_id: driver16.id)
-    ds14 = Drivership.create!(car_id:    car14.id,
-                             driver_id: driver17.id)
-    ds15 = Drivership.create!(car_id:    car15.id,
-                             driver_id: driver18.id)
-    ds16 = Drivership.create!(car_id:    car16.id,
-                             driver_id: driver19.id)
-
-    #测试数据
-
-    #2012年历史出车数据
-
-    trip1 = Trip.create!(drivership_id: ds1.id,
-                         destination_id: dest1.id,
-                         departure_time: Date.new(2012,11,1),
-                         back_time: Date.new(2012,11,2),
-                         note_id: note1.id)
-
-    workerships1 = Workership.create!(trip_id: trip1.id, worker_id: worker1.id)
-    workerships2 = Workership.create!(trip_id: trip1.id, worker_id: worker2.id)
-    workerships3 = Workership.create!(trip_id: trip1.id, worker_id: worker3.id)
-
-
-    trip2 = Trip.create!(drivership_id: ds2.id,
-                         destination_id: dest2.id,
-                         departure_time: Date.new(2012,11,1),
-                         back_time: Date.new(2012,11,6),
-                         note_id: note2.id)
-
-    workerships4 = Workership.create!(trip_id: trip2.id, worker_id: worker3.id)
-    workerships5 = Workership.create!(trip_id: trip2.id, worker_id: worker4.id)
-
-
-    trip3 = Trip.create!(drivership_id: ds3.id,
-                         destination_id: dest3.id,
-                         departure_time: Date.new(2012,11,3),
-                         back_time: Date.new(2012,11,5),
-                         note_id: note3.id)
-
-    workerships6 = Workership.create!(trip_id: trip3.id, worker_id: worker5.id)
-    workerships7 = Workership.create!(trip_id: trip3.id, worker_id: worker6.id)
-    workerships8 = Workership.create!(trip_id: trip3.id, worker_id: worker7.id)
-    workerships9 = Workership.create!(trip_id: trip3.id, worker_id: worker8.id)
-
-
-    trip4 = Trip.create!(drivership_id: ds4.id,
-                         destination_id: dest4.id,
-                         departure_time: Date.new(2012,11,10),
-                         back_time: Date.new(2012,11,12),
-                         note_id: note4.id)
-
-    workerships10 = Workership.create!(trip_id: trip4.id, worker_id: worker9.id)
-    workerships11 = Workership.create!(trip_id: trip4.id, worker_id: worker10.id)
-    workerships12 = Workership.create!(trip_id: trip4.id, worker_id: worker11.id)
-    workerships13 = Workership.create!(trip_id: trip4.id, worker_id: worker12.id)
-
-
-    trip5 = Trip.create!(drivership_id: ds5.id,
-                         destination_id: dest5.id,
-                         departure_time: Date.new(2012,11,11),
-                         back_time: Date.new(2012,11,12),
-                         note_id: note3.id)
-
-    workerships14 = Workership.create!(trip_id: trip5.id, worker_id: worker13.id)
-    workerships15 = Workership.create!(trip_id: trip5.id, worker_id: worker14.id)
-    workerships16 = Workership.create!(trip_id: trip5.id, worker_id: worker15.id)
-
-
-    trip6 = Trip.create!(drivership_id: ds6.id,
-                         destination_id: dest6.id,
-                         departure_time: Date.new(2012,11,12),
-                         back_time: Date.new(2012,11,16),
-                         note_id: note1.id)
-
-    workerships18 = Workership.create!(trip_id: trip6.id, worker_id: worker16.id)
-    workerships19 = Workership.create!(trip_id: trip6.id, worker_id: worker17.id)
-
-
-    trip7 = Trip.create!(drivership_id: ds7.id,
-                         destination_id: dest7.id,
-                         departure_time: Date.new(2012,11,13),
-                         back_time: Date.new(2012,11,15),
-                         note_id: note2.id)
-
-    workerships20 = Workership.create!(trip_id: trip7.id, worker_id: worker18.id)
-    workerships21 = Workership.create!(trip_id: trip7.id, worker_id: worker19.id)
-
-
-    trip8 = Trip.create!(drivership_id: ds8.id,
-                         destination_id: dest8.id,
-                         departure_time: Date.new(2012,11,17),
-                         back_time: Date.new(2012,11,20),
-                         note_id: note4.id)
-
-    workerships22 = Workership.create!(trip_id: trip8.id, worker_id: worker20.id)
-    workerships23 = Workership.create!(trip_id: trip8.id, worker_id: worker21.id)
-    workerships24 = Workership.create!(trip_id: trip8.id, worker_id: worker22.id)
-    workerships25 = Workership.create!(trip_id: trip8.id, worker_id: worker23.id)
-
-
-    trip9 = Trip.create!(drivership_id: ds9.id,
-                         destination_id: dest9.id,
-                         departure_time: Date.new(2012,11,18),
-                         back_time: Date.new(2012,11,23),
-                         note_id: note1.id)
-
-    workerships26 = Workership.create!(trip_id: trip9.id, worker_id: worker24.id)
-    workerships27 = Workership.create!(trip_id: trip9.id, worker_id: worker25.id)
-
-
-    trip10 = Trip.create!(drivership_id: ds10.id,
-                          destination_id: dest10.id,
-                          departure_time: Date.new(2012,11,23),
-                          back_time: Date.new(2012,11,25),
-                          note_id: note3.id)
-
-    workerships28 = Workership.create!(trip_id: trip10.id, worker_id: worker26.id)
-    workerships29 = Workership.create!(trip_id: trip10.id, worker_id: worker27.id)
-    workerships30 = Workership.create!(trip_id: trip10.id, worker_id: worker28.id)
-
-
-    trip11 = Trip.create!(drivership_id: ds1.id,
-                          destination_id: dest1.id,
-                          departure_time: Date.new(2012,10,1),
-                          back_time: Date.new(2012,10,2),
-                          note_id: note1.id)
-
-    workerships31 = Workership.create!(trip_id: trip11.id, worker_id: worker29.id)
-    workerships32 = Workership.create!(trip_id: trip11.id, worker_id: worker30.id)
-    workerships33 = Workership.create!(trip_id: trip11.id, worker_id: worker31.id)
-    workerships34 = Workership.create!(trip_id: trip11.id, worker_id: worker32.id)
-
-
-    trip12 = Trip.create!(drivership_id: ds2.id,
-                          destination_id: dest2.id,
-                          departure_time: Date.new(2012,10,1),
-                          back_time: Date.new(2012,10,6),
-                          note_id: note2.id)
-
-    workerships35 = Workership.create!(trip_id: trip12.id, worker_id: worker33.id)
-    workerships36 = Workership.create!(trip_id: trip12.id, worker_id: worker34.id)
-
-
-    trip13 = Trip.create!(drivership_id: ds3.id,
-                          destination_id: dest3.id,
-                          departure_time: Date.new(2012,10,3),
-                          back_time: Date.new(2012,10,5),
-                          note_id: note3.id)
-
-    workerships37 = Workership.create!(trip_id: trip13.id, worker_id: worker35.id)
-    workerships38 = Workership.create!(trip_id: trip13.id, worker_id: worker36.id)
-
-
-    trip14 = Trip.create!(drivership_id: ds4.id,
-                          destination_id: dest4.id,
-                          departure_time: Date.new(2012,10,10),
-                          back_time: Date.new(2012,10,12),
-                          note_id: note4.id)
-
-    workerships39 = Workership.create!(trip_id: trip14.id, worker_id: worker37.id)
-    workerships40 = Workership.create!(trip_id: trip14.id, worker_id: worker38.id)
-
-
-    trip15 = Trip.create!(drivership_id: ds5.id,
-                          destination_id: dest5.id,
-                          departure_time: Date.new(2012,10,11),
-                          back_time: Date.new(2012,10,12),
-                          note_id: note3.id)
-
-    workerships41 = Workership.create!(trip_id: trip15.id, worker_id: worker39.id)
-    workerships42 = Workership.create!(trip_id: trip15.id, worker_id: worker40.id)
-    workerships43 = Workership.create!(trip_id: trip15.id, worker_id: worker41.id)
-    workerships44 = Workership.create!(trip_id: trip15.id, worker_id: worker42.id)
-    workerships45 = Workership.create!(trip_id: trip15.id, worker_id: worker43.id)
-    workerships46 = Workership.create!(trip_id: trip15.id, worker_id: worker44.id)
-
-
-    trip16 = Trip.create!(drivership_id: ds6.id,
-                          destination_id: dest6.id,
-                          departure_time: Date.new(2012,10,12),
-                          back_time: Date.new(2012,10,16),
-                          note_id: note1.id)
-
-    workerships47 = Workership.create!(trip_id: trip16.id, worker_id: worker45.id)
-    workerships48 = Workership.create!(trip_id: trip16.id, worker_id: worker46.id)
-    workerships49 = Workership.create!(trip_id: trip16.id, worker_id: worker47.id)
-
-
-    trip17 = Trip.create!(drivership_id: ds7.id,
-                          destination_id: dest7.id,
-                          departure_time: Date.new(2012,10,13),
-                          back_time: Date.new(2012,10,15),
-                          note_id: note2.id)
-
-
-    workerships50 = Workership.create!(trip_id: trip17.id, worker_id: worker48.id)
-    workerships51 = Workership.create!(trip_id: trip17.id, worker_id: worker49.id)
-
-
-    trip18 = Trip.create!(drivership_id: ds8.id,
-                          destination_id: dest8.id,
-                          departure_time: Date.new(2012,10,17),
-                          back_time: Date.new(2012,10,20),
-                          note_id: note4.id)
-
-    workerships52 = Workership.create!(trip_id: trip18.id, worker_id: worker50.id)
-    workerships53 = Workership.create!(trip_id: trip18.id, worker_id: worker51.id)
-    workerships54 = Workership.create!(trip_id: trip18.id, worker_id: worker52.id)
-
-
-    trip19 = Trip.create!(drivership_id: ds9.id,
-                          destination_id: dest9.id,
-                          departure_time: Date.new(2012,10,18),
-                          back_time: Date.new(2012,10,23),
-                          note_id: note1.id)
-
-    workerships55 = Workership.create!(trip_id: trip19.id, worker_id: worker53.id)
-    workerships56 = Workership.create!(trip_id: trip19.id, worker_id: worker54.id)
-    workerships57 = Workership.create!(trip_id: trip19.id, worker_id: worker55.id)
-
-
-    trip20 = Trip.create!(drivership_id: ds10.id,
-                          destination_id: dest10.id,
-                          departure_time: Date.new(2012,10,23),
-                          back_time: Date.new(2012,10,25),
-                          note_id: note3.id)
-
-    workerships58 = Workership.create!(trip_id: trip20.id, worker_id: worker56.id)
-    workerships59 = Workership.create!(trip_id: trip20.id, worker_id: worker57.id)
-
-
-    trip21 = Trip.create!(drivership_id: ds6.id,
-                          destination_id: dest6.id,
-                          departure_time: Date.new(2012,9,12),
-                          back_time: Date.new(2012,9,16),
-                          note_id: note1.id)
-
-    workerships60 = Workership.create!(trip_id: trip21.id, worker_id: worker58.id)
-    workerships61 = Workership.create!(trip_id: trip21.id, worker_id: worker59.id)
-
-
-    trip22 = Trip.create!(drivership_id: ds7.id,
-                          destination_id: dest7.id,
-                          departure_time: Date.new(2012,9,13),
-                          back_time: Date.new(2012,9,15),
-                          note_id: note2.id)
-
-    workerships62 = Workership.create!(trip_id: trip22.id, worker_id: worker60.id)
-    workerships63 = Workership.create!(trip_id: trip22.id, worker_id: worker61.id)
-
-
-    trip23 = Trip.create!(drivership_id: ds8.id,
-                          destination_id: dest8.id,
-                          departure_time: Date.new(2012,8,17),
-                          back_time: Date.new(2012,8,20),
-                          note_id: note4.id)
-
-    workerships64 = Workership.create!(trip_id: trip23.id, worker_id: worker62.id)
-    workerships65 = Workership.create!(trip_id: trip23.id, worker_id: worker63.id)
-    workerships66 = Workership.create!(trip_id: trip23.id, worker_id: worker64.id)
-    workerships67 = Workership.create!(trip_id: trip23.id, worker_id: worker65.id)
-
-
-    trip24 = Trip.create!(drivership_id: ds9.id,
-                          destination_id: dest9.id,
-                          departure_time: Date.new(2012,8,18),
-                          back_time: Date.new(2012,11,23),
-                          note_id: note1.id)
-
-    workerships68 = Workership.create!(trip_id: trip24.id, worker_id: worker66.id)
-    workerships69 = Workership.create!(trip_id: trip24.id, worker_id: worker67.id)
-    workerships70 = Workership.create!(trip_id: trip24.id, worker_id: worker68.id)
-
-
-    trip25 = Trip.create!(drivership_id: ds10.id,
-                          destination_id: dest10.id,
-                          departure_time: Date.new(2012,8,23),
-                          back_time: Date.new(2012,8,25),
-                          note_id: note3.id)
-
-    workerships71 = Workership.create!(trip_id: trip25.id, worker_id: worker69.id)
-    workerships72 = Workership.create!(trip_id: trip25.id, worker_id: worker70.id)
-
-
-    trip26 = Trip.create!(drivership_id: ds1.id,
-                          destination_id: dest1.id,
-                          departure_time: Date.new(2012,7,1),
-                          back_time: Date.new(2012,7,2),
-                          note_id: note1.id)
-
-    workerships73 = Workership.create!(trip_id: trip26.id, worker_id: worker71.id)
-    workerships74 = Workership.create!(trip_id: trip26.id, worker_id: worker72.id)
-
-
-    trip27 = Trip.create!(drivership_id: ds2.id,
-                          destination_id: dest2.id,
-                          departure_time: Date.new(2012,7,1),
-                          back_time: Date.new(2012,7,6),
-                          note_id: note2.id)
-
-    workerships75 = Workership.create!(trip_id: trip27.id, worker_id: worker73.id)
-    workerships76 = Workership.create!(trip_id: trip27.id, worker_id: worker74.id)
-
-
-
-    trip28 = Trip.create!(drivership_id: ds3.id,
-                          destination_id: dest3.id,
-                          departure_time: Date.new(2012,7,3),
-                          back_time: Date.new(2012,7,5),
-                          note_id: note3.id)
-
-    workerships77 = Workership.create!(trip_id: trip28.id, worker_id: worker75.id)
-    workerships78 = Workership.create!(trip_id: trip28.id, worker_id: worker76.id)
-
-
-
-    trip29 = Trip.create!(drivership_id: ds4.id,
-                          destination_id: dest4.id,
-                          departure_time: Date.new(2012,7,10),
-                          back_time: Date.new(2012,7,12),
-                          note_id: note4.id)
-
-    workerships79 = Workership.create!(trip_id: trip29.id, worker_id: worker77.id)
-    workerships80 = Workership.create!(trip_id: trip29.id, worker_id: worker78.id)
-    workerships81 = Workership.create!(trip_id: trip29.id, worker_id: worker79.id)
-
-
-    trip30 = Trip.create!(drivership_id: ds5.id,
-                          destination_id: dest5.id,
-                          departure_time: Date.new(2012,6,11),
-                          back_time: Date.new(2012,6,12),
-                          note_id: note3.id)
-
-    workerships82 = Workership.create!(trip_id: trip30.id, worker_id: worker80.id)
-    workerships83 = Workership.create!(trip_id: trip30.id, worker_id: worker81.id)
-    workerships84 = Workership.create!(trip_id: trip30.id, worker_id: worker82.id)
-    workerships85 = Workership.create!(trip_id: trip30.id, worker_id: worker83.id)
-
-
-    trip40 = Trip.create!(drivership_id: ds6.id,
-                          destination_id: dest6.id,
-                          departure_time: Date.new(2011,12,31),
-                          back_time: Date.new(2012,1,3),
-                          note_id: note2.id)
-
-    workerships40 = Workership.create!(trip_id: trip40.id, worker_id: worker84.id)
-    workerships40 = Workership.create!(trip_id: trip40.id, worker_id: worker85.id)
-    workerships40 = Workership.create!(trip_id: trip40.id, worker_id: worker86.id)
-    workerships40 = Workership.create!(trip_id: trip40.id, worker_id: worker87.id)
-
-
-    trip41 = Trip.create!(drivership_id: ds7.id,
-                          destination_id: dest7.id,
-                          departure_time: Date.new(2012,1,2),
-                          back_time: Date.new(2012,1,4),
-                          note_id: note5.id)
-
-    workerships41 = Workership.create!(trip_id: trip41.id, worker_id: worker88.id)
-    workerships41 = Workership.create!(trip_id: trip41.id, worker_id: worker89.id)
-    workerships41 = Workership.create!(trip_id: trip41.id, worker_id: worker90.id)
-    workerships41 = Workership.create!(trip_id: trip41.id, worker_id: worker91.id)
-
-
-    #出车中
-    trip31 = Trip.create!(drivership_id: ds1.id,
-                          destination_id: dest1.id,
-                          departure_time: Date.new(2012,11,27),
-                          back_time: Date.new(2012,11,28),
-                          note_id: note1.id,
-                          ing: true)
-
-    workerships86 = Workership.create!(trip_id: trip31.id, worker_id: worker15.id)
-    workerships87 = Workership.create!(trip_id: trip31.id, worker_id: worker16.id)
-    workerships88 = Workership.create!(trip_id: trip31.id, worker_id: worker17.id)
-
-    ds1_car = ds1.car
-
-    ds1_car.current_trip = trip31.id
-
-    ds1_car.save
-
-
-    TripUser.create!(user_id:driver1.id, trip_id: trip31.id)
-    TripUser.create!(user_id:worker15.id, trip_id: trip31.id)
-    TripUser.create!(user_id:worker16.id, trip_id: trip31.id)
-    TripUser.create!(user_id:worker17.id, trip_id: trip31.id)
-
-
-
-    trip32 = Trip.create!(drivership_id: ds2.id,
-                          destination_id: dest2.id,
-                          departure_time: Date.new(2012,11,27),
-                          back_time: Date.new(2012,11,28),
-                          note_id: note2.id,
-                          ing: true)
-
-    workerships89 = Workership.create!(trip_id: trip32.id, worker_id: worker25.id)
-    workerships90 = Workership.create!(trip_id: trip32.id, worker_id: worker26.id)
-    workerships91 = Workership.create!(trip_id: trip32.id, worker_id: worker27.id)
-
-
-    ds2_car = ds2.car
-
-    ds2_car.current_trip = trip32.id
-
-    ds2_car.save
-
-    TripUser.create!(user_id:driver2.id, trip_id: trip32.id)
-    TripUser.create!(user_id:worker25.id, trip_id: trip32.id)
-    TripUser.create!(user_id:worker26.id, trip_id: trip32.id)
-    TripUser.create!(user_id:worker27.id, trip_id: trip32.id)
-
-
-    trip33 = Trip.create!(drivership_id: ds3.id,
-                          destination_id: dest3.id,
-                          departure_time: Date.new(2012,11,28),
-                          back_time: Date.new(2012,11,29),
-                          note_id: note3.id,
-                          ing: true)
-
-    workerships92 = Workership.create!(trip_id: trip33.id, worker_id: worker36.id)
-    workerships93 = Workership.create!(trip_id: trip33.id, worker_id: worker37.id)
-
-    ds3_car = ds3.car
-
-    ds3_car.current_trip = trip33.id
-
-    ds3_car.save
-
-
-    TripUser.create!(user_id:driver3.id, trip_id: trip33.id)
-    TripUser.create!(user_id:worker36.id, trip_id: trip33.id)
-    TripUser.create!(user_id:worker37.id, trip_id: trip33.id)
-
-
-    trip34 = Trip.create!(drivership_id: ds4.id,
-                          destination_id: dest4.id,
-                          departure_time: Date.new(2012,11,27),
-                          back_time: Date.new(2012,11,28),
-                          note_id: note4.id,
-                          ing: true)
-
-    workerships94 = Workership.create!(trip_id: trip34.id, worker_id: worker38.id)
-    workerships95 = Workership.create!(trip_id: trip34.id, worker_id: worker39.id)
-    workerships96 = Workership.create!(trip_id: trip34.id, worker_id: worker40.id)
-    workerships97 = Workership.create!(trip_id: trip34.id, worker_id: worker41.id)
-
-    ds4_car = ds4.car
-
-    ds4_car.current_trip = trip34.id
-
-    ds4_car.save
-
-
-    TripUser.create!(user_id:driver4.id, trip_id: trip34.id)
-    TripUser.create!(user_id:worker38.id, trip_id: trip34.id)
-    TripUser.create!(user_id:worker39.id, trip_id: trip34.id)
-    TripUser.create!(user_id:worker40.id, trip_id: trip34.id)
-    TripUser.create!(user_id:worker41.id, trip_id: trip34.id)
-
-
-    trip35 = Trip.create!(drivership_id: ds5.id,
-                          destination_id: dest5.id,
-                          departure_time: Date.new(2012,11,27),
-                          back_time: Date.new(2012,11,29),
-                          note_id: note3.id,
-                          ing: true)
-
-    workerships98 = Workership.create!(trip_id: trip35.id, worker_id: worker52.id)
-    workerships99 = Workership.create!(trip_id: trip35.id, worker_id: worker53.id)
-    workerships100 = Workership.create!(trip_id: trip35.id, worker_id: worker54.id)
-
-    ds5_car = ds5.car
-
-    ds5_car.current_trip = trip35.id
-
-    ds5_car.save
-
-
-    TripUser.create!(user_id:driver5.id, trip_id: trip35.id)
-    TripUser.create!(user_id:worker52.id, trip_id: trip35.id)
-    TripUser.create!(user_id:worker53.id, trip_id: trip35.id)
-    TripUser.create!(user_id:worker54.id, trip_id: trip35.id)
-
-
-    trip36 = Trip.create!(drivership_id: ds6.id,
-                          destination_id: dest6.id,
-                          departure_time: Date.new(2012,11,27),
-                          back_time: Date.new(2012,11,30),
-                          note_id: note1.id,
-                          ing: true)
-
-    workerships101 = Workership.create!(trip_id: trip36.id, worker_id: worker65.id)
-    workerships102 = Workership.create!(trip_id: trip36.id, worker_id: worker66.id)
-
-    ds6_car = ds6.car
-
-    ds6_car.current_trip = trip36.id
-
-    ds6_car.save
-
-
-
-    TripUser.create!(user_id:driver6.id, trip_id: trip36.id)
-    TripUser.create!(user_id:worker65.id, trip_id: trip36.id)
-    TripUser.create!(user_id:worker66.id, trip_id: trip36.id)
-
-
-    trip37 = Trip.create!(drivership_id: ds7.id,
-                          destination_id: dest7.id,
-                          departure_time: Date.new(2012,11,28),
-                          back_time: Date.new(2012,11,28),
-                          note_id: note2.id,
-                          ing: true)
-
-    workerships103 = Workership.create!(trip_id: trip37.id, worker_id: worker77.id)
-    workerships104 = Workership.create!(trip_id: trip37.id, worker_id: worker78.id)
-    workerships105 = Workership.create!(trip_id: trip37.id, worker_id: worker79.id)
-    workerships106 = Workership.create!(trip_id: trip37.id, worker_id: worker80.id)
-
-
-    ds7_car = ds7.car
-
-    ds7_car.current_trip = trip37.id
-
-    ds7_car.save
-
-
-    TripUser.create!(user_id:driver7.id, trip_id: trip37.id)
-    TripUser.create!(user_id:worker77.id, trip_id: trip37.id)
-    TripUser.create!(user_id:worker78.id, trip_id: trip37.id)
-    TripUser.create!(user_id:worker79.id, trip_id: trip37.id)
-    TripUser.create!(user_id:worker80.id, trip_id: trip37.id)
-
-
-
-
-    trip38 = Trip.create!(drivership_id: ds8.id,
-                          destination_id: dest8.id,
-                          departure_time: Date.new(2012,11,28),
-                          back_time: Date.new(2012,12,6),
-                          note_id: note4.id,
-                          ing: true)
-
-
-    workerships107 = Workership.create!(trip_id: trip38.id, worker_id: worker81.id)
-    workerships108 = Workership.create!(trip_id: trip38.id, worker_id: worker82.id)
-    workerships109 = Workership.create!(trip_id: trip38.id, worker_id: worker83.id)
-
-    ds8_car = ds8.car
-
-    ds8_car.current_trip = trip38.id
-
-    ds8_car.save
-
-    TripUser.create!(user_id:driver11.id, trip_id: trip38.id)
-    TripUser.create!(user_id:worker81.id, trip_id: trip38.id)
-    TripUser.create!(user_id:worker82.id, trip_id: trip38.id)
-    TripUser.create!(user_id:worker83.id, trip_id: trip38.id)
-
-
-
-
-    #s = "%d,%d,%d"%[worker81.id,worker82.id,worker83.id]
-    #
-    #trip38.workers_ids = s
-    #trip38.save
-    #puts trip38.workers_ids
 
     @trips = Trip.all
     @trips.each { |trip|

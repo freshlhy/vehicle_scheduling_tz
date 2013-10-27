@@ -1,4 +1,6 @@
 #encoding: utf-8
+require 'date'
+
 class CarsDatatable
   delegate :params, :h, :link_to, :edit_admins_car_path, :admins_car_path, to: :@view
 
@@ -24,7 +26,9 @@ class CarsDatatable
           DT_RowId: car.id, #行id
           model: h(car.model),
           plate: h(car.plate),
-          load_limit: h(car.load_limit)
+          load_limit: h(car.load_limit),
+          # age: h(((Date.today.mjd.to_f - car.since.mjd)/365).round(1))
+          since: h(car.since)
       }
     end
   end
@@ -40,7 +44,7 @@ class CarsDatatable
 
     if params[:sSearch].present?
 
-      cars = cars.where("model like :search or plate like :search or load_limit like :search", search: "%#{params[:sSearch]}%")
+      cars = cars.where("model like :search or plate like :search or load_limit or since like :search", search: "%#{params[:sSearch]}%")
 
     end
 

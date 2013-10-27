@@ -1,7 +1,7 @@
-<% provide(:title, '事由选项') %>
+<% provide(:title, '出车用途') %>
 
 <div class="content span9">
-  <h4>事由选项</h4>
+  <h4>出车用途</h4>
 
   <div class="row">
     <div class="span9" id="alert-info">
@@ -14,7 +14,7 @@
              border="0" data-source="<%= admins_notes_url(format: "json") %>">
         <thead>
         <tr class="alert alert-success">
-          <th>出车事由名称</th>
+          <th>出车用途</th>
         </tr>
         </thead>
         <tbody>
@@ -29,7 +29,7 @@
           <p><%= link_to "修改", '#', class: "btn edit-btn", id: "edit_admins_note", remote: true %></p>
 
           <p><%= link_to "删除", '#', class: "btn remove-btn", id: "delete_admins_note",
-                 :confirm => "确定要删除这个事由吗？", :method=>:delete, remote: true %></p>
+                 :confirm => "确定要删除这个用途吗？", :method=>:delete, remote: true %></p>
         </div>
         <div class="span2" id="form-wapper">
 

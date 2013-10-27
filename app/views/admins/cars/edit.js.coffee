@@ -6,3 +6,6 @@ jQuery ->
     $("#form-wapper").hide()
 
   $("#alert-info").html('')
+  
+  $('#input_car_since').datepicker()
+  $('#input_car_since').attr('readOnly', 'true')

@@ -7,7 +7,7 @@ class Trip < ActiveRecord::Base
 
   validates :drivership_id, :presence => {:message => '车辆或司机不能为空'}
   validates :destination_id, :presence => {:message => '出车地不能为空'}
-  validates :note_id, :presence => {:message => '事由不能为空'}
+  validates :note_id, :presence => {:message => '用途不能为空'}
   validates :departure_time, :presence => {:message => '出发时间不能为空'}
   validates :back_time, :presence => {:message => '预计归来时间不能为空'}
   validate :departure_time_is_date?

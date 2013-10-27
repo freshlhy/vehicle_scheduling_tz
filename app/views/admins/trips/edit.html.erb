@@ -130,13 +130,13 @@
           </div>
 
           <div class="control-group">
-            <label class="control-label" for="chzn-note-select">事由</label>
+            <label class="control-label" for="chzn-note-select">用途</label>
 
             <div class="controls">
               <div class="chosen">
                 <%= collection_select(:trip, :note_id, Note.all, :id, :name, {:include_blank => true},
                                       {:class => "chzn-select-deselect", :id => "chzn-note-select",
-                                       :'data-placeholder' => "请选择出车事由...", :name => "note_id"}) %>
+                                       :'data-placeholder' => "请选择出车用途...", :name => "note_id"}) %>
               </div>
             </div>
           </div>

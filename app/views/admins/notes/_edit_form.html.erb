@@ -1,6 +1,6 @@
 <%= form_for @note, :as => :note, :url => admins_note_path(@note), :method => :put, :remote => true, :validate => true,
              :html => {:class => "well-form"} do |f| %>
-    <%= f.label :name, "事由名称", :class=>"control-label" %>
+    <%= f.label :name, "用途名称", :class=>"control-label" %>
     <%= f.text_field :name, :class=>"input-medium" %>
 
     <div class="control-group">

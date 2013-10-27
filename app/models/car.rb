@@ -1,6 +1,6 @@
 #encoding: utf-8
 class Car < ActiveRecord::Base
-  attr_accessible :model, :plate, :load_limit, :current_trip
+  attr_accessible :model, :plate, :load_limit, :current_trip, :since
 
   has_many :driverships
   has_many :drivers, through: :driverships
@@ -8,6 +8,8 @@ class Car < ActiveRecord::Base
   validates :plate, :presence => {:message => '车牌不能为空'}, Length: { maximum: 50 },
             :uniqueness => {:case_sensitive => false, :message => '车牌重复'}
   validates :model, :presence => {:message => '车型不能为空'}, Length: { maximum: 50 }
+
+  validates :since, :presence => {:message => 'Since不能为空'}
   validates_numericality_of :load_limit, :allow_nil => true
 
   before_destroy :confirm_car_not_in_trip
