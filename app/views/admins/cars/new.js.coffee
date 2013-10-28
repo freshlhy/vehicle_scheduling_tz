@@ -7,3 +7,6 @@ jQuery ->
 
   $("#alert-info").html('')
 
+  $('#input_new_car_since').datepicker()
+  $('#input_new_car_since').attr('readOnly', 'true')
+
