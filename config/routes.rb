@@ -20,6 +20,8 @@ VehicleScheduling::Application.routes.draw do
 
     resources :accidents
 
+    match '/add-accident', to: "accidents#new"
+
     match '/workers-history', to:"workers_history#index"
     match '/workers-history/:id/edit' => 'workers_history#edit'
     match '/workers-history/:id' => 'workers_history#update', :via => :put

@@ -17,7 +17,7 @@ class Car < ActiveRecord::Base
   before_destroy :confirm_car_not_in_trip
 
   def model_plate
-    self.model + "|" + self.plate
+    self.model + "/" + self.plate
   end
 
   def self.page(page)

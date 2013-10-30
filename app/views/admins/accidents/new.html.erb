@@ -1,0 +1,112 @@
+<% provide(:title, '安全事故管理|添加事故') %>
+
+<div class="content span9">
+  <div class="row">
+    <div class="span9">
+      <h4>安全事故管理</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span1">
+      <a href="/admins/trips" class="btn btn-mini">«返回</a>
+    </div>
+    <div id="title" class="span8">添加事故</div>
+  </div>
+  <div class="row">
+    <div class="span9">
+      <% flash.each do |key, value| %>
+          <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span9">
+      <%= form_for @accident, :as => :accident, :url => '/admins/accidents', :method => :post,
+                   :html => {:class => "form-horizontal"} do |f| %>
+
+          <%= render 'shared/error_messages' , object: f.object %>
+
+          <div class="control-group">
+            <label class="control-label" for="chzn-group-select">驾驶员</label>
+
+            <div class="controls">
+              <div class="chosen">
+                <%= collection_select(:accident, :driver_id, @drivers, :id, :name, {:include_blank => true},
+                      {:class => "chzn-select-deselect", :id => "chzn-driver-select",
+                       :'data-placeholder' => "请选择驾驶员...", :name => "accident[driver_id]"}) %>
+							</div>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="chzn-car-select">驾驶车辆</label>
+
+            <div class="controls">
+              <div class="chosen">
+                <%= collection_select(:accident, :car_id, @cars, :id, :model_plate, {:include_blank => true},
+                                      {:class => "chzn-select-deselect", :id => "chzn-car-select",
+                                       :'data-placeholder' => "请选择驾驶车辆...", :name => "accident[car_id]"}) %>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="control-group">
+            <label class="control-label" for="accident_location">肇事地点</label>
+
+            <div class="controls">
+								<input class="input-long" id="accident_location" name="accident[location]" size="30" type="text">
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="inputA_date">肇事时间</label>
+
+            <div class="controls controls-row">
+              <input class="span4" type="text" id="inputA_date"
+                     value="<%= @accident.a_date %>" name="accident[a_date]" style="cursor:pointer;">
+              <i class="icon-calendar span1"></i>
+            </div>
+          </div>
+          <div class="control-group">
+	          <blockquote>
+	          	<p>以下为车辆事故后处理填写事项</p>
+						</blockquote>
+					</div>
+
+					<div class="control-group">
+            <label class="control-label" for="accident_responsible">事故责任人</label>
+
+            <div class="controls">
+								<input class="input-long" id="accident_responsible" name="accident[responsible]" size="30" type="text">
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="accident_damage">损坏程度</label>
+
+            <div class="controls">
+								<input class="input-long" id="accident_damage" name="accident[damage]" size="30" type="text">
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="accident_casualties">伤亡人数</label>
+
+            <div class="controls">
+								<input class="input-mini" id="accident_casualties" name="accident[casualties]" size="30" type="text">
+            </div>
+          </div>
+
+          <div class="control-group">
+            <div class="controls">
+              <button type="submit" class="btn">添加</button>
+              <a href="/admins/trips" class="btn cancle">取消</a>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+
+</div>
+
