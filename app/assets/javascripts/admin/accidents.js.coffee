@@ -6,32 +6,31 @@
 jQuery ->
   $('.chzn-select-deselect').chosen({ allow_single_deselect:true })
 
-  $('#trips').dataTable
+  $('#accidents').dataTable
     sPaginationType: "bootstrap"
     bProcessing: true
     bServerSide: true
     "bStateSave": true
-    sAjaxSource: $('#trips').data('source')
+    sAjaxSource: $('#accidents').data('source')
     #排版
     "sDom": "<'span9'<'row'<'span3'l><'span1'T><'span1'r><'span4'f>>><'span9't><'span9'<'row'<'span5'i><'span4'p>>>"
     "aLengthMenu": [[10, 25, 50, 100, 200, 500, 1000, -1], [10, 25, 50, 100, 200, 500, 1000, "所有"]]
-    #禁用第三、七列排序
+    #禁用七列排序
     "aoColumnDefs": [
-      { "bSortable": false, "aTargets": [ 2 ] },
       { "bSortable": false, "aTargets": [ 7 ] }
     ]
-    #首次打开默认以第六列排序
-    "aaSorting": [[ 5, "desc" ]]
+    #首次打开默认以第4列排序
+    "aaSorting": [[ 3, "desc" ]]
 
     "bAutoWidth": false,
     "aoColumns": [
-      { "sWidth": "65px", "aTargets": [ 0 ] },
-      { "sWidth": "40px", "aTargets": [ 1 ] },
-      { "sWidth": "145px", "aTargets": [ 2 ] },
-      { "sWidth": "50px", "aTargets": [ 3 ] },
-      { "sWidth": "65px", "aTargets": [ 4 ] },
+      { "sWidth": "45px", "aTargets": [ 0 ] },
+      { "sWidth": "65px", "aTargets": [ 1 ] },
+      { "sWidth": "100px", "aTargets": [ 2 ] },
+      { "sWidth": "65px", "aTargets": [ 3 ] },
+      { "sWidth": "70px", "aTargets": [ 4 ] },
       { "sWidth": "65px", "aTargets": [ 5 ] },
-      { "sWidth": "45px", "aTargets": [ 6 ] },
+      { "sWidth": "65px", "aTargets": [ 6 ] },
       { "sWidth": "28px", "aTargets": [ 7 ] }
     ]
     "oTableTools": {

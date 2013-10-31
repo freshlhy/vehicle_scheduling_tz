@@ -15,7 +15,6 @@ class CarsDatatable
         iTotalDisplayRecords: cars.total_entries,
         aaData: data
     }
-
   end
 
   private

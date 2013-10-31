@@ -6,7 +6,7 @@ class Accident < ActiveRecord::Base
   validates :location, :presence => {:message => '肇事地点不能为空'}, Length: { maximum: 150 }
   validates :a_date, :presence => {:message => '肇事时间不能为空'}
 
-  validates_numericality_of :casualties, :allow_nil => true
+  validates_numericality_of :casualties, :allow_nil => true, :message => '伤亡人数应为数字'
 
   belongs_to :car
   belongs_to :driver
