@@ -34,8 +34,11 @@ class Permission
       allow :'admins/destinations',    [:index, :new, :create, :edit, :update, :destroy]
       allow :'admins/notes',           [:index, :new, :create, :edit, :update, :destroy]
 
-      allow :'admins/add_accident',    [:new, :create, :edit]
-      allow :'admins/accidents',       [:index, :new, :create, :edit, :update, :destroy]
+      allow :'admins/add_accident',    [:new]
+      allow :'admins/accidents',       [:index, :create, :edit, :update, :destroy]
+
+      allow :'admins/add_plm',    [:new]
+      allow :'admins/plms',       [:index, :create, :edit, :update, :destroy]
     end
   end
 

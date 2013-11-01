@@ -90,7 +90,7 @@ class AccidentsDatatable
   end
 
   def sort_column
-    columns = %w[plate driver workers driver departure_time back_time car]
+    columns = %w[driver plate location a_date responsible damage casualties]
     columns[params[:iSortCol_0].to_i]
   end
 

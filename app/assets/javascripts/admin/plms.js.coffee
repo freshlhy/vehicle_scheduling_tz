@@ -7,12 +7,12 @@ jQuery ->
   $('.chzn-select').chosen()
   $('.chzn-select-deselect').chosen({ allow_single_deselect:true })
 
-  $('#accidents').dataTable
+  $('#plms').dataTable
     sPaginationType: "bootstrap"
     bProcessing: true
     bServerSide: true
     "bStateSave": true
-    sAjaxSource: $('#accidents').data('source')
+    sAjaxSource: $('#plms').data('source')
     #排版
     "sDom": "<'span9'<'row'<'span3'l><'span1'T><'span1'r><'span4'f>>><'span9't><'span9'<'row'<'span5'i><'span4'p>>>"
     "aLengthMenu": [[10, 25, 50, 100, 200, 500, 1000, -1], [10, 25, 50, 100, 200, 500, 1000, "所有"]]
@@ -25,9 +25,9 @@ jQuery ->
 
     "bAutoWidth": false,
     "aoColumns": [
-      { "sWidth": "45px", "aTargets": [ 0 ] },
+      { "sWidth": "65px", "aTargets": [ 0 ] },
       { "sWidth": "65px", "aTargets": [ 1 ] },
-      { "sWidth": "100px", "aTargets": [ 2 ] },
+      { "sWidth": "65px", "aTargets": [ 2 ] },
       { "sWidth": "65px", "aTargets": [ 3 ] },
       { "sWidth": "70px", "aTargets": [ 4 ] },
       { "sWidth": "65px", "aTargets": [ 5 ] },
@@ -65,9 +65,9 @@ jQuery ->
 
   $.datepicker.setDefaults($.datepicker.regional['zh-CN'])
 
-  $('#inputA_date').datepicker()
-  $('#inputA_date').attr( 'readOnly', 'true' )
 
+  $('#start').datepicker()
+  $('#start').attr( 'readOnly', 'true' )
 
 
 

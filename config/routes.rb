@@ -19,8 +19,10 @@ VehicleScheduling::Application.routes.draw do
     resources :notes
 
     resources :accidents
+    resources :plms
 
     match '/add-accident', to: "add_accident#new"
+    match '/add-plm', to: "add_plm#new"
 
     match '/workers-history', to:"workers_history#index"
     match '/workers-history/:id/edit' => 'workers_history#edit'

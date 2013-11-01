@@ -8,18 +8,6 @@ module Admins
       end
     end
 
-    def new
-
-      @accident = Accident.new
-      @cars = Car.order("model").all
-      @drivers = Driver.order("name").all
-
-      respond_to do |format|
-        format.html 
-      end
-
-    end
-
     def create
 
       @accident = Accident.new(params[:accident])

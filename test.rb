@@ -29,6 +29,13 @@ require 'date'
 # 	puts "#{item} : + #{rand(20..30)}"
 # end
 
-puts 2.3465.round
+# puts 2.3465.round
 
-puts 2.3465.round(1)
+# puts 2.3465.round(1)
+
+arr = [ 21, 1,34,112, 212 ]
+len = arr.length
+
+arr[1..(arr.length-1)].each do |i|
+	puts i
+end
