@@ -10,7 +10,7 @@
     <div class="span1">
       <a href="/admins/plms" class="btn btn-mini">«返回</a>
     </div>
-    <div id="title" class="span8">添加车辆维护</div>
+    <div id="title" class="span8">更新车辆维护</div>
   </div>
   <div class="row">
     <div class="span9">
@@ -21,27 +21,23 @@
   </div>
   <div class="row">
     <div class="span9">
-      <%= form_for @plm, :as => :plm, :url => '/admins/plms', :method => :post,
+      <%= form_for @plm, :as => :plm, :url =>  admins_plm_path(@plm), :method => :put,
                    :html => {:class => "form-horizontal"} do |f| %>
 
           <%= render 'shared/error_messages' , object: f.object %>
 
           <div class="control-group">
-            <label class="control-label" for="chzn-muti-car-select">维护车辆(多选)</label>
+            <label class="control-label" for="chzn-muti-car-select">维护车辆</label>
 
             <div class="controls">
               <div class="chosen">
                 <select data-placeholder="请选择维护车辆..." class="chzn-select" multiple
-                        id="chzn-muti-car-select" name="cars_ids[]" tabindex="40">
+                        id="chzn-muti-car-select" name="car_id" tabindex="40" disabled="true">
                   <option value=""></option>
-                    <% @cars.each do |car| %>
-                      <option value="<%= car.id %>"
-                          <% if @selected_key and @selected_key.include? car.id.to_s %>
+                      <option value="<%= @plm.car.id %>"
                              selected="selected"
-                          <% end %>
-                          ><%= car.model_plate %>
+                          ><%= @plm.car.model_plate %>
                       </option>
-                    <% end %>
                 </select>
               </div>
             </div>
@@ -88,9 +84,29 @@
 
           </div>
 
+          <div class="control-group">
+            <label class="control-label" for="last">上次维护时间</label>
+
+            <div class="controls controls-row">
+              <input class="span4" type="text" id="last" name="plm[last]" value="<%= @plm.last %>" style="cursor:pointer;">
+              <i class="icon-calendar span1"></i>
+            </div>
+
+          </div>
 
           <div class="control-group">
-            <label class="control-label" for="chzn-active-select">是否立即激活</label>
+            <label class="control-label" for="nextd">下次维护时间</label>
+
+            <div class="controls controls-row">
+              <input class="span4" type="text" id="nextd" name="plm[nextd]" value="<%= @plm.nextd %>" style="cursor:pointer;">
+              <i class="icon-calendar span1"></i>
+            </div>
+
+          </div>
+
+
+          <div class="control-group">
+            <label class="control-label" for="chzn-active-select">是否激活</label>
 
             <div class="controls">
               <div class="chosen">
@@ -114,7 +130,7 @@
 
           <div class="control-group">
             <div class="controls">
-              <button type="submit" class="btn">添加</button>
+              <button type="submit" class="btn">更新</button>
               <a href="/admins/plms" class="btn cancle">取消</a>
             </div>
           </div>

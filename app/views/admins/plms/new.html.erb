@@ -1,16 +1,16 @@
-<% provide(:title, '安全事故管理|添加事故') %>
+<% provide(:title, '定期工作管理|添加车辆维护') %>
 
 <div class="content span9">
   <div class="row">
     <div class="span9">
-      <h4>安全事故管理</h4>
+      <h4>定期工作管理</h4>
     </div>
   </div>
   <div class="row">
     <div class="span1">
       <a href="/admins/plms" class="btn btn-mini">«返回</a>
     </div>
-    <div id="title" class="span8">添加事故</div>
+    <div id="title" class="span8">添加车辆维护</div>
   </div>
   <div class="row">
     <div class="span9">
@@ -21,7 +21,7 @@
   </div>
   <div class="row">
     <div class="span9">
-      <%= form_for @plm, :as => :accident, :url => '/admins/plms', :method => :post,
+      <%= form_for @plm, :as => :plm, :url => '/admins/plms', :method => :post,
                    :html => {:class => "form-horizontal"} do |f| %>
 
           <%= render 'shared/error_messages' , object: f.object %>
@@ -115,7 +115,7 @@
           <div class="control-group">
             <div class="controls">
               <button type="submit" class="btn">添加</button>
-              <a href="/admins/accidents" class="btn cancle">取消</a>
+              <a href="/admins/plms" class="btn cancle">取消</a>
             </div>
           </div>
       <% end %>

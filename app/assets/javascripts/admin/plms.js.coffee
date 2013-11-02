@@ -69,5 +69,12 @@ jQuery ->
   $('#start').datepicker()
   $('#start').attr( 'readOnly', 'true' )
 
+  $('#last').datepicker()
+  $('#last').attr( 'readOnly', 'true' )
+
+  $('#nextd').datepicker()
+  $('#nextd').attr( 'readOnly', 'true' )
+
+
 
 

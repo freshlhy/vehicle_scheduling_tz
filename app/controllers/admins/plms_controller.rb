@@ -39,9 +39,7 @@ module Admins
     end
 
     def edit
-      @plm = plm.find(params[:id])
-      @cars = Car.order("model").all
-      @drivers = Driver.order("name").all
+      @plm = Plm.find(params[:id])
       respond_to do |format|
         format.html 
       end
@@ -49,20 +47,18 @@ module Admins
 
 
     def update
-      @plm = plm.find(params[:id])
+      @plm = Plm.find(params[:id])
       if @plm.update_attributes(params[:plm])
-        flash[:success] = "该事故记录已更新！"
+        flash[:success] = "该维护记录已更新！"
         redirect_to '/admins/plms'
       else
-        @cars = Car.order("model").all
-        @drivers = Driver.order("name").all
         render 'edit'
       end
 
     end
 
     def destroy
-      @plm = plm.find(params[:id])
+      @plm = Plm.find(params[:id])
 
       @plm.destroy
 
