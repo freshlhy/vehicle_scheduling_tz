@@ -6,3 +6,6 @@ jQuery ->
     $("#form-wapper").hide()
 
   $("#alert-info").html('')
+
+  $(".submit").click ->
+    $("#new_part").submit()

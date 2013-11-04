@@ -1,0 +1,126 @@
+<% provide(:title, '定期工作管理|添加车辆维护') %>
+
+<div class="content span9">
+  <div class="row">
+    <div class="span9">
+      <h4>定期工作管理</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span1">
+      <a href="/admins/plms" class="btn btn-mini">«返回</a>
+    </div>
+    <div id="title" class="span8">添加车辆维护</div>
+  </div>
+  <div class="row">
+    <div class="span9">
+      <% flash.each do |key, value| %>
+          <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span9">
+      <%= form_for @plm, :as => :plm, :url => '/admins/plms', :method => :post,
+                   :html => {:class => "form-horizontal"} do |f| %>
+
+          <%= render 'shared/error_messages' , object: f.object %>
+
+          <div class="control-group">
+            <label class="control-label" for="chzn-muti-car-select">维护车辆(多选)</label>
+
+            <div class="controls">
+              <div class="chosen">
+                <select data-placeholder="请选择维护车辆..." class="chzn-select" multiple
+                        id="chzn-muti-car-select" name="cars_ids[]" tabindex="40">
+                  <option value=""></option>
+                    <% @cars.each do |car| %>
+                      <option value="<%= car.id %>"
+                          <% if @selected_key and @selected_key.include? car.id.to_s %>
+                             selected="selected"
+                          <% end %>
+                          ><%= car.model_plate %>
+                      </option>
+                    <% end %>
+                </select>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="chzn-plm-type">周期类型</label>
+
+            <div class="controls">
+                <input class="input-medium" id="chzn-plm-type" value="<%= @plm.plm_type %>" name="plm[plm_type]" size="30" type="text">
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="chzn-value-select">维护周期</label>
+
+            <div class="controls">
+              <div class="chosen">
+                <select data-placeholder="请选择维护周期..." class="chzn-select"
+                        id="chzn-value-select" name="plm[value]" value="<%= @plm.value %>" tabindex="40">
+                  <option value=""></option>
+                    <% ["月度", "季度", "年度"].each do |d| %>
+                      <option value="<%= d %>"
+                        <% if @plm.value == d %>
+                           selected="selected"
+                        <% end %>
+                        ><%= d %>
+                      </option>
+                    <% end %>
+                </select>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="start">开始时间</label>
+
+            <div class="controls controls-row">
+              <input class="span4" type="text" id="start" name="plm[start]" value="<%= @plm.start %>" style="cursor:pointer;">
+              <i class="icon-calendar span1"></i>
+            </div>
+
+          </div>
+
+
+          <div class="control-group">
+            <label class="control-label" for="chzn-active-select">是否立即激活</label>
+
+            <div class="controls">
+              <div class="chosen">
+                <select data-placeholder="请选择是否立即激活..." class="chzn-select"
+                        id="chzn-active-select" name="plm[is_active]" value="<%= @plm.is_active %>" tabindex="40">
+                  <option value=""></option>
+                      <option value="true" 
+                        <% if @plm.is_active %>
+                           selected="selected"
+                        <% end %>>是</option>
+                      <option value="false"
+                        <% if !@plm.is_active %>
+                           selected="selected"
+                        <% end %>>否</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="control-group">
+            <div class="controls">
+              <button type="submit" class="btn">添加</button>
+              <a href="/admins/plms" class="btn cancle">取消</a>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+
+</div>
+

@@ -30,12 +30,12 @@ jQuery ->
     "oTableTools": {
       "sRowSelect": "single"
       "fnRowSelected": ( node ) ->
-        $('#edit_admins_car').attr('href','/admins/parts/'+node.id+'/edit')
-        $('#delete_admins_car').attr('href','/admins/parts/'+node.id)
+        $('#edit_admins_part').attr('href','/admins/parts/'+node.id+'/edit')
+        $('#delete_admins_part').attr('href','/admins/parts/'+node.id)
         $("#alert-info").html('')
       "fnRowDeselected": (node) ->
-        $('#edit_admins_car').attr('href','#')
-        $('#delete_admins_car').attr('href','#')
+        $('#edit_admins_part').attr('href','#')
+        $('#delete_admins_part').attr('href','#')
         $("#alert-info").html('')
       "aButtons": [
         {
