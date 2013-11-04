@@ -1,0 +1,19 @@
+<%= form_for @part, :url => admins_parts_path, :method => :post, :remote => true, :validate => true,
+             :html => {:class => "well-form"} do |f| %>
+    <%= f.label :name, "名称", :class=>"control-label" %>
+    <%= f.text_field :name, :class=>"input-medium" %>
+    <%= f.label :model, "型号", :class=>"control-label" %>
+    <%= f.text_field :model, :class=>"input-medium" %>
+    <%= f.label :rating_mileage, "额定里程", :class=>"control-label" %>
+    <%= f.text_field :rating_mileage, :class=>"input-medium"%>
+    <%= f.label :rating_life, "额定寿命", :class=>"control-label" %>
+    <input type="text" id="input_new_part_since" class="input-medium"
+      name="part[rating_life]">
+
+    <div class="control-group">
+      <div class="controls">
+        <%= link_to "确定", "#", class: "btn submit"%>
+        <%= link_to "取消", "#", class: "btn cancle" %>
+      </div>
+    </div>
+<% end %>

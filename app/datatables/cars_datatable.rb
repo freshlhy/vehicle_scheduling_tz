@@ -74,7 +74,7 @@ class CarsDatatable
   end
 
   def sort_column
-    columns = %w[model plate load_limit]
+    columns = %w[model plate load_limit since]
     columns[params[:iSortCol_0].to_i]
   end
 

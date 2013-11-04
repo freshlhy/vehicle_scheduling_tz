@@ -37,8 +37,9 @@ class Permission
       allow :'admins/add_accident',    [:new]
       allow :'admins/accidents',       [:index, :create, :edit, :update, :destroy]
 
-      allow :'admins/add_plm',    [:new]
-      allow :'admins/plms',       [:index, :create, :edit, :update, :destroy]
+      allow :'admins/add_plm',         [:new]
+      allow :'admins/plms',            [:index, :create, :edit, :update, :destroy]
+      allow :'admins/parts',           [:index, :new, :create, :edit, :update, :destroy]
     end
   end
 

@@ -1,0 +1,20 @@
+<%= form_for @car, :as => :car, :url => admins_car_path(@car), :method => :put, :remote => true, :validate => true,
+             :html => {:class => "well-form"} do |f| %>
+    <%= f.label :model, "车型", :class=>"control-label" %>
+    <%= f.text_field :model, :class=>"input-medium" %>
+    <%= f.label :plate, "车牌", :class=>"control-label" %>
+    <%= f.text_field :plate, :class=>"input-medium" %>
+    <%= f.label :load_limit, "限载人数", :class=>"control-label" %>
+    <%= f.text_field :load_limit, :class=>"input-medium" %>
+    <%= f.label :since, "Since", :class=>"control-label" %>
+    <input type="text" id="input_car_since" class="input-medium"
+      value="<%= @car.since %>" name="car[since]" style="cursor:pointer;" data-validate="true">
+
+
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit "确定", class: "btn"%>
+        <%= link_to "取消", "#", class: "btn cancle" %>
+      </div>
+    </div>
+<% end %>

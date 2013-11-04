@@ -20,6 +20,7 @@ VehicleScheduling::Application.routes.draw do
 
     resources :accidents
     resources :plms
+    resources :parts
 
     match '/add-accident', to: "add_accident#new"
     match '/add-plm', to: "add_plm#new"
