@@ -7,7 +7,7 @@ class Part < ActiveRecord::Base
   validates_numericality_of :rating_life, :allow_nil => true
   validates_numericality_of :rating_mileage, :allow_nil => true
 
-  def model_plate
+  def name_model
     self.name + "/" + self.model
   end
 

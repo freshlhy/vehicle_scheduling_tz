@@ -1,0 +1,95 @@
+<% provide(:title, '定期工作管理|添加监督部件') %>
+
+<div class="content span9">
+  <div class="row">
+    <div class="span9">
+      <h4>定期工作管理</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span1">
+      <a href="/admins/supervises" class="btn btn-mini">«返回</a>
+    </div>
+    <div id="title" class="span8">添加监督部件</div>
+  </div>
+  <div class="row">
+    <div class="span9">
+      <% flash.each do |key, value| %>
+          <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span9">
+      <%= form_for @supervise, :as => :supervise, :url => '/admins/supervises', :method => :post,
+                   :html => {:class => "form-horizontal"} do |f| %>
+
+          <%= render 'shared/error_messages' , object: f.object %>
+
+          <div class="control-group">
+            <label class="control-label" for="chzn-muti-part-select">监督部件(多选)</label>
+
+            <div class="controls">
+              <div class="chosen">
+                <select data-placeholder="请选择监督部件..." class="chzn-select" multiple
+                        id="chzn-muti-part-select" name="part_ids[]" tabindex="40">
+                  <option value=""></option>
+                    <% @parts.each do |part| %>
+                      <option value="<%= part.id %>"
+                          <% if @selected_parts and @selected_parts.include? part.id.to_s %>
+                             selected="selected"
+                          <% end %>
+                          ><%= part.name_model %>
+                      </option>
+                    <% end %>
+                </select>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="chzn-muti-car-select">所属车辆(多选)</label>
+
+            <div class="controls">
+              <div class="chosen">
+                <select data-placeholder="请选择所属车辆..." class="chzn-select" multiple
+                        id="chzn-muti-car-select" name="car_ids[]" tabindex="40">
+                  <option value=""></option>
+                    <% @cars.each do |car| %>
+                      <option value="<%= car.id %>"
+                          <% if @selected_cars and @selected_cars.include? car.id.to_s %>
+                             selected="selected"
+                          <% end %>
+                          ><%= car.model_plate %>
+                      </option>
+                    <% end %>
+                </select>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="start">启用时间</label>
+
+            <div class="controls controls-row">
+              <input class="span4" type="text" id="start" name="supervise[start]" value="<%= @supervise.start %>" style="cursor:pointer;">
+              <i class="icon-calendar span1"></i>
+            </div>
+
+          </div>
+
+
+          <div class="control-group">
+            <div class="controls">
+              <button type="submit" class="btn">添加</button>
+              <a href="/admins/supervises" class="btn cancle">取消</a>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+
+</div>
+

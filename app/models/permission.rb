@@ -40,6 +40,9 @@ class Permission
       allow :'admins/add_plm',         [:new]
       allow :'admins/plms',            [:index, :create, :edit, :update, :destroy]
       allow :'admins/parts',           [:index, :new, :create, :edit, :update, :destroy]
+
+      allow :'admins/add_supervise',   [:new]
+      allow :'admins/supervises',      [:index, :create, :edit, :update, :destroy]
     end
   end
 

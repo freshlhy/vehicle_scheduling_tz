@@ -1,0 +1,137 @@
+/*
+ *= require jquery-ui-custom
+ */
+
+.content {
+  margin-left: -15px;
+  padding-right: 0;
+  margin-right: 0;
+}
+
+#supervises_wrapper .span9 {
+  margin-left: 0px;
+}
+
+#supervises_wrapper .span1 {
+  width: 80px;
+  margin-left: 0px;
+}
+
+#supervises_wrapper .DTTT.btn-group {
+  margin-left: -56px;
+}
+
+.span2 {
+  width: 120px;
+}
+
+.span3 {
+  width: 220px;
+}
+
+.span4 {
+  width: 335px;
+}
+
+.span9 {
+  width: 735px;
+}
+
+/*table*/
+
+.table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th {
+  background-color: #b9e9bb;
+}
+
+.dataTables_scroll {
+  margin-bottom: 8px;
+}
+
+.icon-edit {
+  margin-top: 5px;
+}
+
+.icon-remove {
+  margin-top: 5px;
+  margin-left: 3px;
+}
+
+/*form*/
+#chzn-car-select {
+  width: 250px;
+}
+
+#chzn-driver-select {
+  width: 150px;
+}
+
+#chzn-value-select {
+  width: 150px;
+}
+
+#chzn-active-select {
+  width: 180px;
+}
+
+#chzn-muti-car-select {
+  width: 450px;
+}
+
+#chzn-destination-select {
+  width: 150px;
+}
+
+#inputA_date {
+  width: 100px;
+}
+
+#start {
+  width: 100px;
+}
+
+#chzn-note-select {
+  width: 150px;
+}
+
+
+.btn {
+  margin-right: 10px;
+}
+
+.cancle {
+  margin-left: 10px;
+}
+
+.save {
+  margin-left: 10px;
+}
+
+
+#title {
+  margin-bottom: 20px;
+  font-size: 1.1em;
+}
+
+.span8 {
+  margin-left: -10px;
+  margin-top: 2px;
+}
+
+
+.icon-calendar {
+  margin-top: 7px;
+}
+
+.controls-row [class*="span"] + [class*="span"]{
+  margin-left: 3px;
+}
+
+blockquote {
+
+  margin-bottom: 5px;
+  margin-top: 20px;
+  margin-left: 85px;
+}
+
+
