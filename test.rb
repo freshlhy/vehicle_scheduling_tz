@@ -33,9 +33,13 @@ require 'date'
 
 # puts 2.3465.round(1)
 
-arr = [ 21, 1,34,112, 212 ]
-len = arr.length
+# arr = [ 21, 1,34,112, 212 ]
+# len = arr.length
 
-arr[1..(arr.length-1)].each do |i|
-	puts i
-end
+# arr[1..(arr.length-1)].each do |i|
+# 	puts i
+# end
+
+puts 1<2? "1<2":"1>2" 
+
+puts 1>2? "1<2":"1>2" 
