@@ -6,6 +6,7 @@ class Car < ActiveRecord::Base
   has_many :drivers, through: :driverships
 
   has_many :accidents
+  has_many :supervises
 
   validates :plate, :presence => {:message => '车牌不能为空'}, Length: { maximum: 50 },
             :uniqueness => {:case_sensitive => false, :message => '车牌重复'}

@@ -18,21 +18,20 @@ jQuery ->
     "aLengthMenu": [[10, 25, 50, 100, 200, 500, 1000, -1], [10, 25, 50, 100, 200, 500, 1000, "所有"]]
     #禁用七列排序
     "aoColumnDefs": [
-      { "bSortable": false, "aTargets": [ 7 ] }
+      { "bSortable": false, "aTargets": [ 6 ] }
     ]
     #首次打开默认以第4列排序
-    "aaSorting": [[ 3, "desc" ]]
+    "aaSorting": [[ 2, "desc" ]]
 
     "bAutoWidth": false,
     "aoColumns": [
-      { "sWidth": "45px", "aTargets": [ 0 ] },
-      { "sWidth": "65px", "aTargets": [ 1 ] },
-      { "sWidth": "100px", "aTargets": [ 2 ] },
+      { "sWidth": "135px", "aTargets": [ 0 ] },
+      { "sWidth": "120px", "aTargets": [ 1 ] },
+      { "sWidth": "75px", "aTargets": [ 2 ] },
       { "sWidth": "65px", "aTargets": [ 3 ] },
-      { "sWidth": "70px", "aTargets": [ 4 ] },
-      { "sWidth": "65px", "aTargets": [ 5 ] },
-      { "sWidth": "65px", "aTargets": [ 6 ] },
-      { "sWidth": "28px", "aTargets": [ 7 ] }
+      { "sWidth": "65px", "aTargets": [ 4 ] },
+      { "sWidth": "30px", "aTargets": [ 5 ] },
+      { "sWidth": "28px", "aTargets": [ 6 ] }
     ]
     "oTableTools": {
       "aButtons": [

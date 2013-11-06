@@ -12,17 +12,16 @@
   </div>
   <div class="row">
     <div class="span9">
-      <table id="accidents" class="table table-hover table-striped table-bordered" cellpadding="0" cellspacing="0"
-             border="0" data-source="<%= admins_accidents_url(format: "json") %>">
+      <table id="supervises" class="table table-hover table-striped table-bordered" cellpadding="0" cellspacing="0"
+             border="0" data-source="<%= admins_supervises_url(format: "json") %>">
         <thead>
         <tr class="alert alert-success">
-          <th>驾驶员</th>
-          <th>驾驶车辆</th>
-          <th>肇事地点</th>
-          <th>肇事时间</th>
-          <th>事故责任人</th>
-          <th>损坏程度</th>
-          <th>伤亡人数</th>
+          <th>监督部件</th>
+          <th>所属车辆</th>
+          <th>启用时间</th>
+          <th>里程状况</th>
+          <th>寿命状态</th>
+          <th>状态</th>
           <th>更改</th>
         </tr>
         </thead>

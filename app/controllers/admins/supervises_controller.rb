@@ -18,14 +18,12 @@ module Admins
         part_ids = params[:part_ids]
         car_ids  = params[:car_ids]
 
-        start    = (params[:start] and params[:start].size)? params[:start] : Date.today
-
         part_ids[0..(part_ids.length-1)].each do |part_id|
           car_ids[0..(car_ids.length-1)].each do |car_id|
             @supervise = Supervise.new(params[:supervise])
-            @supervise.part_id = part_id
-            @supervise.car_id  = car_id 
-            @supervise.start   = start
+            @supervise.part_id   = part_id
+            @supervise.car_id    = car_id 
+            @supervise.is_active = "启用"
             @supervise.save
           end
         end
@@ -53,8 +51,19 @@ module Admins
 
     def update
       @supervise = Supervise.find(params[:id])
-      if @supervise.update_attributes(params[:supervise])
-        flash[:success] = "该维护记录已更新！"
+
+      if is_integer(params[:supervise][:current_mileage])
+        params[:supervise][:mileage_status] = params[:supervise][:current_mileage].to_s + "/" + @supervise.part.rating_mileage.to_s
+        params[:supervise][:mileage_status_value] = Integer(params[:supervise][:current_mileage]) / @supervise.part.rating_mileage
+      end
+
+      if is_integer(params[:supervise][:current_life])
+        params[:supervise][:life_status] = params[:supervise][:current_life].to_s + "/" + @supervise.part.rating_life.to_s
+        params[:supervise][:life_status_value] = Integer(params[:supervise][:current_life]) / @supervise.part.rating_life
+      end
+
+      if @supervise.update_attributes(params[:supervise]) 
+        flash[:success] = "该监督记录已更新！"
         redirect_to '/admins/supervises'
       else
         render 'edit'
@@ -69,7 +78,7 @@ module Admins
 
       respond_to do |format|
         format.html do
-          flash[:success] = "该事故记录已删除！"
+          flash[:success] = "该监督记录已删除！"
           redirect_to admins_supervises_path
         end
         format.json

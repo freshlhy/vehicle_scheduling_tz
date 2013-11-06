@@ -8,4 +8,9 @@ module ApplicationHelper
       "#{base_title} | #{page_title}"
     end
   end
+
+  def is_integer(str)
+    true if Integer(str) rescue false
+	end
+	
 end
