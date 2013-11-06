@@ -22,6 +22,9 @@ require 'date'
 
 # puts Date.today.mjd - Date.new(2013,1,1).mjd
 
+puts ((Date.today.mjd - Date.new(2013,1,1).mjd)/365.0).round(1)
+puts ((Date.today.mjd - Date.new(2013,1,1).mjd)/365.0)
+
 
 # puts rand(20..30)
 
@@ -40,6 +43,6 @@ require 'date'
 # 	puts i
 # end
 
-puts 1<2? "1<2":"1>2" 
+# puts 1<2? "1<2":"1>2" 
 
-puts 1>2? "1<2":"1>2" 
+# puts 1>2? "1<2":"1>2" 

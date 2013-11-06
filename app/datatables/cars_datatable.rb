@@ -20,14 +20,15 @@ class CarsDatatable
   private
 
   def data
+
     cars.map do |car|
       {
           DT_RowId: car.id, #行id
           model: h(car.model),
           plate: h(car.plate),
           load_limit: h(car.load_limit),
-          # age: h(((Date.today.mjd.to_f - car.since.mjd)/365).round(1))
-          since: h(car.since)
+          # age: h(((Date.today.mjd.to_f - car.age.mjd)/365).round(1))
+          age: h(car.age)
       }
     end
   end
@@ -43,7 +44,7 @@ class CarsDatatable
 
     if params[:sSearch].present?
 
-      cars = cars.where("model like :search or plate like :search or load_limit or since like :search", search: "%#{params[:sSearch]}%")
+      cars = cars.where("model like :search or plate like :search or load_limit or age like :search", search: "%#{params[:sSearch]}%")
 
     end
 
@@ -74,7 +75,7 @@ class CarsDatatable
   end
 
   def sort_column
-    columns = %w[model plate load_limit since]
+    columns = %w[model plate load_limit age]
     columns[params[:iSortCol_0].to_i]
   end
 

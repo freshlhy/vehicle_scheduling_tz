@@ -24,7 +24,7 @@ jQuery ->
       { "mData": "model" },
       { "mData": "plate" },
       { "mData": "load_limit" },
-      { "mData": "since" }
+      { "mData": "age" }
     ]
     "oTableTools": {
       "sRowSelect": "single"

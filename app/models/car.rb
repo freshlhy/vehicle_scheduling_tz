@@ -1,6 +1,6 @@
 #encoding: utf-8
 class Car < ActiveRecord::Base
-  attr_accessible :model, :plate, :load_limit, :current_trip, :since
+  attr_accessible :model, :plate, :load_limit, :current_trip, :since, :age
 
   has_many :driverships
   has_many :drivers, through: :driverships

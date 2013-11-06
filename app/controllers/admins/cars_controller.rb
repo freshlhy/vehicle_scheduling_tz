@@ -1,8 +1,17 @@
+#encoding: utf-8
+require 'date'
+
 module Admins
   class CarsController < BaseController
     # GET /cars
     # GET /cars.json
     def index
+      Car.all.each do |c|
+        if not c.since.nil?
+          c.age = ((Date.today.mjd - c.since.mjd)/365.0).round(1)
+          c.save
+        end
+      end 
       respond_to do |format|
         format.html
         format.json { render json: CarsDatatable.new(view_context) }

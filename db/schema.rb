@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131106034353) do
+ActiveRecord::Schema.define(:version => 20131106155342) do
 
   create_table "accidents", :force => true do |t|
     t.integer  "driver_id"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20131106034353) do
     t.integer  "current_trip", :default => 0
     t.integer  "load_limit"
     t.date     "since"
+    t.float    "age"
   end
 
   create_table "destinations", :force => true do |t|
