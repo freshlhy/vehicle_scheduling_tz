@@ -57,7 +57,7 @@ class CarsDatatable
     #默认按归来时间排序
     cars = Car.order("model asc")
 
-    if sort_column and sort_column.size
+    if sort_column and sort_column.size > 0
       cars = Car.order("#{sort_column} #{sort_direction}")
     end
 

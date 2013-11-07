@@ -13,7 +13,7 @@ module Admins
 
     def create
       
-      if params[:part_ids] and params[:part_ids].size and params[:car_ids] and params[:car_ids].size
+      if params[:part_ids] and params[:part_ids].size > 0 and params[:car_ids] and params[:car_ids].size > 0
 
         part_ids = params[:part_ids]
         car_ids  = params[:car_ids]

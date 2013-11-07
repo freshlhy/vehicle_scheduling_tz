@@ -10,7 +10,7 @@ module Admins
 
     def create
 
-      if params[:cars_ids] and params[:cars_ids].size
+      if params[:cars_ids] and params[:cars_ids].size > 0
         @plm = Plm.new(params[:plm])
         @plm.car_id = params[:cars_ids].first.to_i
         #试存第一个

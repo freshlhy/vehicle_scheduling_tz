@@ -29,7 +29,7 @@ module Workers
       @trip = Trip.find(current_trip(current_user))
 
       #出车人员改动
-      if params[:workers_ids_] and params[:workers_ids_].size
+      if params[:workers_ids_] and params[:workers_ids_].size > 0
         #修改出车人员
         origin_workers_ids = @trip.workers_ids.split(',')
         workers_ids_ = params[:workers_ids_]
@@ -70,7 +70,7 @@ module Workers
 
       respond_to do |format|
         format.html do
-          if params[:workers_ids_] and params[:workers_ids_].size and @trip.errors.empty? and @trip.save
+          if params[:workers_ids_] and params[:workers_ids_].size > 0 and @trip.errors.empty? and @trip.save
             #submit为保存修改
             flash[:success] = "修改已保存！"
             sign_in(current_user)
@@ -81,7 +81,7 @@ module Workers
             @drivership = @trip.drivership
             @selected_key = @trip.workers_ids.split(",")
             @in_trip_users_ids = in_trip_users(@trip)
-            @trip.errors.add(:workers, "工作人员不能为空") unless params[:workers_ids_] and params[:workers_ids_].size
+            @trip.errors.add(:workers, "工作人员不能为空") unless params[:workers_ids_] and params[:workers_ids_].size > 0
 
             sign_in(current_user)
             render '/workers/status/tour'

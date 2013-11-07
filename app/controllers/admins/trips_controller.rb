@@ -70,23 +70,23 @@ module Admins
       end
 
       #出车人员改动
-      if params[:workers_ids_] and params[:workers_ids_].size
+      if params[:workers_ids_] and params[:workers_ids_].size > 0
         #修改出车人员
         origin_workers_ids = @trip.workers_ids.split(',')
-        workers_ids_ = params[:workers_ids_]
-        @trip.workers_ids = workers_ids_.join(',')
+        param_workers_ids = params[:workers_ids_].clone
+        @trip.workers_ids = param_workers_ids.join(',')
         #删除被删除的工作人员
         origin_workers_ids.each { |owi|
-          if workers_ids_.index(owi).nil?
+          if param_workers_ids.index(owi).nil?
             worker = Worker.find(owi)
             trip_user_delete(worker) if @trip.ing
             @trip.workers.delete(worker)
           else
-            workers_ids_.delete(owi)
+            param_workers_ids.delete(owi)
           end
         }
         #增加被添加的工作人员
-        workers_ids_.each { |wi|
+        param_workers_ids.each { |wi|
           worker = Worker.find(wi)
           @trip.workers << worker
           #冲突
@@ -111,7 +111,7 @@ module Admins
 
       respond_to do |format|
         format.html do
-          if params[:workers_ids_] and params[:workers_ids_].size and @trip.errors.empty? and @trip.save
+          if params[:workers_ids_] and params[:workers_ids_].size > 0 and @trip.errors.empty? and @trip.save
             flash[:success] = "修改已保存！"
             redirect_to edit_admins_trip_path(@trip)
           else
@@ -124,7 +124,7 @@ module Admins
             @drivership = @trip.drivership
             @selected_key = @trip.workers_ids.split(",")
             @in_trip_users_ids = in_trip_users(@trip)
-            @trip.errors.add(:workers, "工作人员不能为空") unless params[:workers_ids_] and params[:workers_ids_].size
+            @trip.errors.add(:workers, "工作人员不能为空") unless params[:workers_ids_] and params[:workers_ids_].size > 0
 
             render 'edit'
           end

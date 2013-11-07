@@ -22,8 +22,8 @@ require 'date'
 
 # puts Date.today.mjd - Date.new(2013,1,1).mjd
 
-puts ((Date.today.mjd - Date.new(2013,1,1).mjd)/365.0).round(1)
-puts ((Date.today.mjd - Date.new(2013,1,1).mjd)/365.0)
+# puts ((Date.today.mjd - Date.new(2013,1,1).mjd)/365.0).round(1)
+# puts ((Date.today.mjd - Date.new(2013,1,1).mjd)/365.0)
 
 
 # puts rand(20..30)
@@ -46,3 +46,14 @@ puts ((Date.today.mjd - Date.new(2013,1,1).mjd)/365.0)
 # puts 1<2? "1<2":"1>2" 
 
 # puts 1>2? "1<2":"1>2" 
+
+arr = ["w", "c"]
+
+a = arr.clone
+
+a[1] = "111"
+
+
+puts arr
+
+puts a

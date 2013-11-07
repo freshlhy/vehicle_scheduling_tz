@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131107064724) do
+ActiveRecord::Schema.define(:version => 20131107121219) do
 
   create_table "accidents", :force => true do |t|
     t.integer  "driver_id"
@@ -129,6 +129,7 @@ ActiveRecord::Schema.define(:version => 20131107064724) do
     t.string   "workers_ids"
     t.boolean  "ing",            :default => false
     t.string   "workers_names"
+    t.integer  "mileage"
   end
 
   create_table "users", :force => true do |t|
