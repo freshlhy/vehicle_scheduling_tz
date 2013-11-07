@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131106155342) do
+ActiveRecord::Schema.define(:version => 20131107064724) do
 
   create_table "accidents", :force => true do |t|
     t.integer  "driver_id"
@@ -40,6 +40,15 @@ ActiveRecord::Schema.define(:version => 20131106155342) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "driver_stats", :force => true do |t|
+    t.integer  "driver_id"
+    t.float    "driver_age"
+    t.integer  "trip_count"
+    t.integer  "accident_count"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "driverships", :force => true do |t|
@@ -134,6 +143,7 @@ ActiveRecord::Schema.define(:version => 20131106155342) do
     t.string   "type"
     t.string   "gender"
     t.string   "licence_id"
+    t.date     "since"
   end
 
   add_index "users", ["name"], :name => "index_users_on_name", :unique => true

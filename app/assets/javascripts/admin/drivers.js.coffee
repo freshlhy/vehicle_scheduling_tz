@@ -23,6 +23,7 @@ jQuery ->
       { "mData": "name" },
       { "mData": "gender" },
       { "mData": "licence_id" },
+      { "mData": "driver_age" },
       { "mData": "phone" },
     ]
     "oTableTools": {

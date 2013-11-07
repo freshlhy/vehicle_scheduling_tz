@@ -24,7 +24,8 @@ class DriversDatatable
           name: h(driver.name),
           gender: h(driver.gender),
           licence_id: h(driver.licence_id),
-          phone: h(driver.phone),
+          driver_age: h(driver.driver_stat.driver_age),
+          phone: h(driver.phone)
       }
     end
   end
@@ -39,7 +40,11 @@ class DriversDatatable
     drivers = drivers.page(page).per_page(per_page)
 
     if params[:sSearch].present?
-      drivers = drivers.where("name like :search", search: "%#{params[:sSearch]}%")
+      drivers = drivers.where("name like :search or
+                               gender like :search or
+                               licence_id like :search or
+                               phone like :search or 
+                               driver_age like :search", search: "%#{params[:sSearch]}%")
     end
 
     drivers
@@ -69,7 +74,7 @@ class DriversDatatable
   end
 
   def sort_column
-    columns = %w[name phone]
+    columns = %w[name gender licence_id since phone]
     columns[params[:iSortCol_0].to_i]
   end
 

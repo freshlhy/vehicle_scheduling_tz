@@ -6,6 +6,7 @@ class Driver < User
 
 
   has_many :accidents
+  has_one  :driver_stat
 
   before_destroy :confirm_driver_not_in_trip
 

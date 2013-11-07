@@ -6,6 +6,7 @@ module Admins
     # GET /cars
     # GET /cars.json
     def index
+      # 更新车龄
       Car.all.each do |c|
         if not c.since.nil?
           c.age = ((Date.today.mjd - c.since.mjd)/365.0).round(1)

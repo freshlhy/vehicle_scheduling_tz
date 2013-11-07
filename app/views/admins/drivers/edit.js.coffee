@@ -12,3 +12,6 @@ jQuery ->
 
   $("#password-group").hide()
   $("#password-confirmation-group").hide()
+
+  $('#input_driver_since').datepicker()
+  $('#input_driver_since').attr('readOnly', 'true')
