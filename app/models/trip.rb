@@ -3,10 +3,12 @@
 class Trip < ActiveRecord::Base
   include ActiveModel::Validations
 
-  attr_accessible :drivership_id, :destination_id, :note_id, :back_time, :departure_time, :workers_ids, :ing, :workers_names
+  attr_accessible :drivership_id, :destination_id, :note_id, :back_time, :departure_time, :workers_ids, :ing, :workers_names, :mileage
 
   validates :drivership_id, :presence => {:message => '车辆或司机不能为空'}
   validates :destination_id, :presence => {:message => '出车地不能为空'}
+  validates :mileage, :presence => {:message => '里程不能为空'}
+  validates :mileage, :numericality => { :greater_than_or_equal_to => 0, :message => "里程需为大于零的整数" }
   validates :note_id, :presence => {:message => '用途不能为空'}
   validates :departure_time, :presence => {:message => '出发时间不能为空'}
   validates :back_time, :presence => {:message => '预计归来时间不能为空'}
@@ -46,6 +48,5 @@ class Trip < ActiveRecord::Base
       errors.add(:back_time, '归来时间必须为有效值')
     end
   end
-
 
 end

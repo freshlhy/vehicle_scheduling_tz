@@ -47,13 +47,34 @@ require 'date'
 
 # puts 1>2? "1<2":"1>2" 
 
-arr = ["w", "c"]
+# arr = ["w", "c"]
 
-a = arr.clone
+# a = arr.clone
 
-a[1] = "111"
+# a[1] = "111"
 
 
-puts arr
+# puts arr
 
-puts a
+# puts a
+
+
+
+# def mileage_is_integer?(mileage)
+#   if !is_integer(mileage)
+#     puts '里程需为整数'
+#   end
+# end
+
+# def is_integer(str)
+#   true if Integer(str) rescue false
+# end
+
+# # mileage_is_integer?("qqq")
+
+# mileage_is_integer?(12)
+
+puts Date.today.mjd - Date.new(2013,11,7).mjd + 1
+
+
+

@@ -3,8 +3,8 @@ class CreateParts < ActiveRecord::Migration
     create_table :parts do |t|
       t.string :name
       t.string :model
-      t.integer :rating_mileage
-      t.integer :rating_life
+      t.integer :rating_mileage, default:0
+      t.integer :rating_life, default:0
 
       t.timestamps
     end

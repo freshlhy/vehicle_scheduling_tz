@@ -55,16 +55,6 @@ module Admins
                 car.update_attribute(:current_trip, 0)
               end
             end
-            #if params[:driver_id] != driver.id.to_s
-            #  new_driver = Driver.find(params[:driver_id])
-            #  #冲突解决
-            #  if in_trip?(new_driver)
-            #    @trip.errors.add(:drivers, "就在刚才，你选的司机自己添加出车记录了，概率很小哦~ 囧~~~ 选其它人吧。")
-            #  else
-            #    trip_user_add(@trip, new_driver)
-            #    trip_user_delete(driver)
-            #  end
-            #end
           end
         end
       end
@@ -103,6 +93,7 @@ module Admins
 
       #其它改动
       @trip.destination_id = params[:destination_id]
+      @trip.mileage = params[:mileage]
       @trip.departure_time = params[:departure_time]
       @trip.back_time = params[:back_time]
       @trip.note_id = params[:note_id]

@@ -1,5 +1,5 @@
 class AddMileageToTrips < ActiveRecord::Migration
   def change
-    add_column :trips, :mileage, :integer
+    add_column :trips, :mileage, :integer, default:0
   end
 end

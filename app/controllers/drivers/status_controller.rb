@@ -90,6 +90,7 @@ module Drivers
 
       #其它改动
       @trip.destination_id = params[:destination_id]
+      @trip.mileage = params[:mileage]
       @trip.departure_time = params[:departure_time]
       @trip.back_time = params[:back_time]
       @trip.note_id = params[:note_id]
@@ -107,6 +108,7 @@ module Drivers
                 trip_user_delete(worker)
               }
               @trip.save
+              stat(@trip.id)
               sign_in(current_user)
               redirect_to '/drivers/start'
             else
