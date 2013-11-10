@@ -1,0 +1,48 @@
+<% provide(:title, '首页|车辆维护提醒') %>
+<ul class="nav nav-tabs">
+  <li><a href="/index">车辆情况</a></li>
+  <li class="active"><a href="/alert">维护提醒</a></li>
+  <li><a href="/stat">驾驶员信息</a></li>
+</ul>
+
+<div class="content span12">
+  <div class="row">
+    <div class="span12 alert_title">
+      <h4>七天内需要维护的车辆</h4>
+      <span><%= Date.today %></span>
+    </div>
+  </div>
+
+  
+
+  <div class="row">
+    <div class="span12">
+      <% flash.each do |key, value| %>
+          <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span12">
+      <table id="plms" class="table table-hover table-striped table-bordered" cellpadding="0" cellspacing="0"
+             border="0" data-source="<%= alert_url(format: "json") %>">
+        <thead>
+        <tr class="alert alert-success">
+          <th>维护车辆</th>
+          <th>周期类型</th>
+          <th>维护周期</th>
+          <th>开始时间</th>
+          <th>上次维护</th>
+          <th class="text-error">下次维护</th>
+          <th>是否激活</th>
+          <th>更改</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+

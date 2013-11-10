@@ -1,85 +1,95 @@
 <% provide(:title, '首页') %>
-
+<ul class="nav nav-tabs">
+  <li class="active">
+    <a href="/index">车辆情况</a>
+  </li>
+  <li><a href="/alert">维护提醒 <% if @alert_count > 0 %>
+    <span class="badge badge-warning"><%= @alert_count%></span>
+    <% end %></a></li>
+  <li><a href="/stat">驾驶员信息</a></li>
+</ul>
 <table class="table table-hover">
-  <caption>在用车辆情况</caption>
-  <thead>
-  <tr>
-    <th></th>
-    <th style="width:135px">车型</th>
-    <th>车牌</th>
-    <th>司机</th>
-    <th style="width:186px">工作人员</th>
-    <th>出车地</th>
-    <th>出发时间</th>
-    <th>预计归来时间</th>
-    <th>用途</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @cars_in_use.each_with_index do |c, i| %>
-      <tr class="alert alert-error">
-        <td><%= i+1 %></td>
-        <td><%= c[:car].model %></td>
-        <td><%= c[:car].plate %></td>
-        <td><%= c[:driver] %></td>
-        <td><%= c[:workers_names] %></td>
-        <td><%= c[:destination] %></td>
-        <td><%= c[:departure_time] %></td>
-        <td><%= c[:back_time] %></td>
-        <td><%= c[:note] %></td>
-      </tr>
-  <% end %>
-  </tbody>
-<table class="table table-hover">
-  <caption>可用车辆情况</caption>
-  <thead>
-  <tr>
-    <th></th>
-    <th>车型</th>
-    <th>车牌</th>
-    <th>限载人数</th>
-    <th>司机</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @available_cars.each_with_index do |c, i| %>
-      <tr class="alert alert-success">
-        <td><%= i+1 %></td>
-        <td><%= c[:car].model %></td>
-        <td><%= c[:car].plate %></td>
-        <td><%= c[:car].load_limit %></td>
-        <% if !c[:driver].nil? %>
-            <td><%= c[:driver].name %>(<%= c[:driver].phone %>)</td>
-        <% else %>
-            <td></td>
+      <caption>在用车辆情况</caption>
+      <thead>
+        <tr>
+          <th></th>
+          <th style="width:135px">车型</th>
+          <th>车牌</th>
+          <th>司机</th>
+          <th style="width:186px">工作人员</th>
+          <th>出车地</th>
+          <th>出发时间</th>
+          <th>预计归来时间</th>
+          <th>用途</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cars_in_use.each_with_index do |c, i| %>
+        <tr class="alert alert-error">
+          <td><%= i+1 %></td>
+          <td><%= c[:car].model %></td>
+          <td><%= c[:car].plate %></td>
+          <td><%= c[:driver] %></td>
+          <td><%= c[:workers_names] %></td>
+          <td><%= c[:destination] %></td>
+          <td><%= c[:departure_time] %></td>
+          <td><%= c[:back_time] %></td>
+          <td><%= c[:note] %></td>
+        </tr>
         <% end %>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+      </tbody>
+    </table>
+    <table class="table table-hover">
+      <caption>可用车辆情况</caption>
+      <thead>
+        <tr>
+          <th></th>
+          <th>车型</th>
+          <th>车牌</th>
+          <th>限载人数</th>
+          <th>司机</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @available_cars.each_with_index do |c, i| %>
+        <tr class="alert alert-success">
+          <td><%= i+1 %></td>
+          <td><%= c[:car].model %></td>
+          <td><%= c[:car].plate %></td>
+          <td><%= c[:car].load_limit %></td>
+          <% if !c[:driver].nil? %>
+          <td><%= c[:driver].name %>(<%= c[:driver].phone %>)</td>
+          <% else %>
+          <td></td>
+          <% end %>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-<table class="table table-hover">
-  <caption>可用司机情况</caption>
-  <thead>
-  <tr>
-    <th></th>
-    <th>姓名</th>
-    <th>联系电话</th>
-    <th>最近出车时间</th>
-    <th>最近出车地</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @available_drivers.each_with_index do |c, i| %>
-      <tr class="alert alert-success">
-        <td><%= i+1 %></td>
-        <td><%= c[:name] %></td>
-        <td><%= c[:phone] %></td>
-        <td><%= c[:latest_trip_time] %></td>
-        <td><%= c[:latest_trip_destination] %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+    <table class="table table-hover">
+      <caption>可用司机情况</caption>
+      <thead>
+        <tr>
+          <th></th>
+          <th>姓名</th>
+          <th>联系电话</th>
+          <th>最近出车时间</th>
+          <th>最近出车地</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @available_drivers.each_with_index do |c, i| %>
+        <tr class="alert alert-success">
+          <td><%= i+1 %></td>
+          <td><%= c[:name] %></td>
+          <td><%= c[:phone] %></td>
+          <td><%= c[:latest_trip_time] %></td>
+          <td><%= c[:latest_trip_destination] %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
 
 

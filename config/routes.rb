@@ -70,6 +70,8 @@ VehicleScheduling::Application.routes.draw do
   root to:"sessions#new"
 
   match '/index', to:"index_page#index"
+  match '/alert', to:"index_page#alert"
+  match '/stat', to:"index_page#stat"
 
   match '/about', to:"static_pages#about"
 

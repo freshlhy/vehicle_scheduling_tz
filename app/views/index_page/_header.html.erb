@@ -5,7 +5,15 @@
 
         <% if signed_in? %>
             <li><%= link_to current_user.name, user_root %><small>，您好！</small></li>
-            <li class="active"><%= link_to "首页", root_path %></li>
+            <li class="active">
+              <a href=
+              <% if @alert_count > 0 %>
+               "/alert"
+               <% else%>
+               "/index"
+               <% end %> 
+              >首页</a>
+            </li>
             <li><%= link_to "设置", edit_user_path(current_user) %></li>
             <li><%= link_to "注销", signout_path, method: "delete" %></li>
         <% else %>

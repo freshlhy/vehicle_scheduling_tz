@@ -22,3 +22,19 @@ table caption {
 .form-horizontal {
   margin-top: 15px;
 }
+
+#plms_wrapper, #stats_wrapper {
+  margin-left: -40px;
+}
+
+#plms_wrapper .btn-group, #stats_wrapper .btn-group {
+  margin-left: -85px;
+}
+
+#plms, #stats {
+  margin-top: 5px;
+}
+
+.alert_title {
+  text-align: center;
+}

@@ -23,7 +23,7 @@ class Permission
       allow :'workers/worker_history', [:index]
     end
     if current_user.is_a? Admin
-      allow :'index_page',             [:index]
+      allow :'index_page',             [:index, :alert, :stat]
       allow :'admins/trips',           [:index, :edit, :update, :destroy]
       allow :'admins/drivers_history', [:index, :edit, :update, :destroy]
       allow :'admins/workers_history', [:index, :edit, :update, :destroy]

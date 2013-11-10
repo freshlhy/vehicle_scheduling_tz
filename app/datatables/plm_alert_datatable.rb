@@ -1,6 +1,6 @@
 #encoding: utf-8
 require 'date'
-class PlmsDatatable
+class PlmAlertDatatable
   delegate :params, :h, :link_to, :edit_admins_plm_path, :admins_plm_path, to: :@view
 
   def initialize(view)
@@ -10,7 +10,7 @@ class PlmsDatatable
   def as_json(options = {})
     {
         sEcho: params[:sEcho].to_i,
-        iTotalRecords: Plm.count,
+        iTotalRecords: Plm.where("nextd <= ?", Date.today.next_day(7)).count,
         iTotalDisplayRecords: plms.total_entries,
         aaData: data
     }
@@ -62,14 +62,14 @@ class PlmsDatatable
   def fetch_plms_helper(sort_column, sort_direction)
 
     #默认按归来时间排序
-    plms = Plm.includes(:car).order("nextd desc")
+    plms = Plm.includes(:car).where("nextd <= ?", Date.today.next_day(7)).order("nextd desc")
 
     case sort_column
 
       when "plate"
-        plms = Plm.includes(:car).order("cars.plate #{sort_direction}")
+        plms = Plm.includes(:car).where("nextd <= ?", Date.today.next_day(7)).order("cars.plate #{sort_direction}")
       else
-        plms = Plm.includes(:car).order("#{sort_column} #{sort_direction}")
+        plms = Plm.includes(:car).where("nextd <= ?", Date.today.next_day(7)).order("#{sort_column} #{sort_direction}")
     end
 
     plms

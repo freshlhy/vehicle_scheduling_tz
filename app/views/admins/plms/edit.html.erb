@@ -8,7 +8,7 @@
   </div>
   <div class="row">
     <div class="span1">
-      <a href="/admins/supervises" class="btn btn-mini">«返回</a>
+      <a href="/admins/plms" class="btn btn-mini">«返回</a>
     </div>
     <div id="title" class="span8">更新车辆维护</div>
   </div>
@@ -21,7 +21,7 @@
   </div>
   <div class="row">
     <div class="span9">
-      <%= form_for @supervise, :as => :supervise, :url =>  admins_supervise_path(@supervise), :method => :put,
+      <%= form_for @plm, :as => :plm, :url =>  admins_plm_path(@plm), :method => :put,
                    :html => {:class => "form-horizontal"} do |f| %>
 
           <%= render 'shared/error_messages' , object: f.object %>
@@ -34,9 +34,9 @@
                 <select data-placeholder="请选择维护车辆..." class="chzn-select" multiple
                         id="chzn-muti-car-select" name="car_id" tabindex="40" disabled="true">
                   <option value=""></option>
-                      <option value="<%= @supervise.car.id %>"
+                      <option value="<%= @plm.car.id %>"
                              selected="selected"
-                          ><%= @supervise.car.model_plate %>
+                          ><%= @plm.car.model_plate %>
                       </option>
                 </select>
               </div>
@@ -45,10 +45,10 @@
           </div>
 
           <div class="control-group">
-            <label class="control-label" for="chzn-supervise-type">周期类型</label>
+            <label class="control-label" for="chzn-plm-type">周期类型</label>
 
             <div class="controls">
-                <input class="input-medium" id="chzn-supervise-type" value="<%= @supervise.supervise_type %>" name="supervise[supervise_type]" size="30" type="text">
+                <input class="input-medium" id="chzn-plm-type" value="<%= @plm.plm_type %>" name="plm[plm_type]" size="30" type="text">
             </div>
           </div>
 
@@ -58,11 +58,11 @@
             <div class="controls">
               <div class="chosen">
                 <select data-placeholder="请选择维护周期..." class="chzn-select"
-                        id="chzn-value-select" name="supervise[value]" value="<%= @supervise.value %>" tabindex="40">
+                        id="chzn-value-select" name="plm[value]" value="<%= @plm.value %>" tabindex="40">
                   <option value=""></option>
                     <% ["月度", "季度", "年度"].each do |d| %>
                       <option value="<%= d %>"
-                        <% if @supervise.value == d %>
+                        <% if @plm.value == d %>
                            selected="selected"
                         <% end %>
                         ><%= d %>
@@ -78,7 +78,7 @@
             <label class="control-label" for="start">开始时间</label>
 
             <div class="controls controls-row">
-              <input class="span4" type="text" id="start" name="supervise[start]" value="<%= @supervise.start %>" style="cursor:pointer;">
+              <input class="span4" type="text" id="start" name="plm[start]" value="<%= @plm.start %>" style="cursor:pointer;">
               <i class="icon-calendar span1"></i>
             </div>
 
@@ -88,17 +88,17 @@
             <label class="control-label" for="last">上次维护时间</label>
 
             <div class="controls controls-row">
-              <input class="span4" type="text" id="last" name="supervise[last]" value="<%= @supervise.last %>" style="cursor:pointer;">
+              <input class="span4" type="text" id="last" name="plm[last]" value="<%= @plm.last %>" style="cursor:pointer;">
               <i class="icon-calendar span1"></i>
             </div>
 
           </div>
 
           <div class="control-group">
-            <label class="control-label" for="nextd">下次维护时间</label>
+            <label class="control-label" for="nextd">下次维护时间(自动更新)</label>
 
             <div class="controls controls-row">
-              <input class="span4" type="text" id="nextd" name="supervise[nextd]" value="<%= @supervise.nextd %>" style="cursor:pointer;">
+              <input class="span4" type="text" id="nextd" name="plm[nextd]" value="<%= @plm.nextd %>" disabled="true">
               <i class="icon-calendar span1"></i>
             </div>
 
@@ -111,14 +111,14 @@
             <div class="controls">
               <div class="chosen">
                 <select data-placeholder="请选择是否立即激活..." class="chzn-select"
-                        id="chzn-active-select" name="supervise[is_active]" value="<%= @supervise.is_active %>" tabindex="40">
+                        id="chzn-active-select" name="plm[is_active]" value="<%= @plm.is_active %>" tabindex="40">
                   <option value=""></option>
-                      <option value="true" 
-                        <% if @supervise.is_active %>
+                      <option value="是" 
+                        <% if @plm.is_active %>
                            selected="selected"
                         <% end %>>是</option>
-                      <option value="false"
-                        <% if !@supervise.is_active %>
+                      <option value="否"
+                        <% if !@plm.is_active %>
                            selected="selected"
                         <% end %>>否</option>
                 </select>
@@ -131,7 +131,7 @@
           <div class="control-group">
             <div class="controls">
               <button type="submit" class="btn">更新</button>
-              <a href="/admins/supervises" class="btn cancle">取消</a>
+              <a href="/admins/plms" class="btn cancle">取消</a>
             </div>
           </div>
       <% end %>

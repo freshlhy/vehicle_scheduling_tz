@@ -32,32 +32,44 @@ require 'date'
 # puts ((Date.today.mjd - Date.new(2013,1,1).mjd)/365.0).round(1)
 # puts ((Date.today.mjd - Date.new(2013,1,1).mjd)/365.0)
 
+# day = Date.new(2013,11,11)
+# puts Date.today.to_s
+
+# s = "2009-04-15"
+# d = Date.parse( s.gsub(/, */, '-') )
+
+# puts d
+
+puts Date.new(2013,9,26) + 90
+
+# puts Date.today.next_day(7)
+
 
 # puts Date.new(2013,11,8).mjd - Date.new(2013,11,1).mjd
 
 # puts (12/67.to_f).round(1)
 
-arrs = ["月度", "季度", "年度"]
-(1..20).each do |k|
-	arr = arrs.shuffle.first
-	d = Date.new(2012,1,1) + 365*rand()
-	t = d
-	while true
-		if arr.eql?("月度")
-			n = t + 30
-		elsif arr.eql?("季度")
-			n = t + 90
-		else
-			n = t + 360
-		end
-		p = t
-		t = n 
-		break if n.mjd > Date.today.mjd 
-	end
+# arrs = ["月度", "季度", "年度"]
+# (1..20).each do |k|
+# 	arr = arrs.shuffle.first
+# 	d = Date.new(2012,1,1) + 365*rand()
+# 	t = d
+# 	while true
+# 		if arr.eql?("月度")
+# 			n = t + 30
+# 		elsif arr.eql?("季度")
+# 			n = t + 90
+# 		else
+# 			n = t + 360
+# 		end
+# 		p = t
+# 		t = n 
+# 		break if n.mjd > Date.today.mjd 
+# 	end
 
-	puts arr + "\t" + d.to_s + "\t" + p.to_s + "\t" + n.to_s
+# 	puts arr + "\t" + d.to_s + "\t" + p.to_s + "\t" + n.to_s
  
-end
+# end
 
 # puts rand(20..30)
 

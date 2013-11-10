@@ -1,3 +1,6 @@
+#encoding: utf-8
+require 'date'
+
 module Admins
   class PlmsController < BaseController
 
@@ -47,7 +50,25 @@ module Admins
 
 
     def update
+
       @plm = Plm.find(params[:id])
+      param_date = Date.parse( params[:plm][:last].gsub(/, */, '-') )
+      if @plm.last !=  param_date
+        t = param_date
+        while true
+          if params[:plm][:value].eql?("月度")
+            n = t + 30
+          elsif params[:plm][:value].eql?("季度")
+            n = t + 90
+          else
+            n = t + 360
+          end
+          p = t
+          t = n
+          break if n.mjd > Date.today.mjd
+        end
+        params[:plm][:nextd] = n
+      end
       if @plm.update_attributes(params[:plm])
         flash[:success] = "该维护记录已更新！"
         redirect_to '/admins/plms'

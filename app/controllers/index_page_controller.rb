@@ -1,5 +1,6 @@
 #encoding: utf-8
 class IndexPageController < ApplicationController
+  before_filter :count_alert
 
   def index
 
@@ -84,4 +85,25 @@ class IndexPageController < ApplicationController
 
     }
   end
+
+  def alert
+    respond_to do |format|
+      format.html
+      format.json { render json: PlmAlertDatatable.new(view_context) }
+    end
+  end
+
+  def stat
+    respond_to do |format|
+      format.html
+      format.json { render json: DriverStatDatatable.new(view_context) }
+    end
+  end
+
+
+  private
+  def count_alert
+    @alert_count ||= Plm.where("nextd <= ?", Date.today.next_day(7)).count
+  end
+
 end
