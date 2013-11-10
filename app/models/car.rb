@@ -15,6 +15,8 @@ class Car < ActiveRecord::Base
   validates :since, :presence => {:message => 'Since不能为空'}
   validates_numericality_of :load_limit, :allow_nil => true
 
+  scope :in_use, -> { where("current_trip > ?", 0) }
+
   before_destroy :confirm_car_not_in_trip
 
   def model_plate

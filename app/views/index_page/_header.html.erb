@@ -4,7 +4,7 @@
       <ul class="nav-right-top">
 
         <% if signed_in? %>
-            <li><%= link_to current_user.name, user_root %><small>，您好！</small></li>
+            <li><small>管理员 </small><%= link_to current_user.name, user_root %><small>，您好！</small></li>
             <li class="active">
               <a href=
               <% if @alert_count > 0 %>

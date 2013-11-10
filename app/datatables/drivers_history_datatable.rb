@@ -5,15 +5,14 @@ class DriversHistoryDatatable
 
   def initialize(view)
     @view = view
-    @date_range_start = Date.today.years_ago(1).at_beginning_of_year()
-    @date_range_end = Date.today.years_ago(1).end_of_year()
-    @query = "departure_time >= ? AND departure_time <= ?"
+    @end_date = Date.today.at_beginning_of_year()
+    @query = "departure_time < ?"
   end
 
   def as_json(options = {})
     {
         sEcho: params[:sEcho].to_i,
-        iTotalRecords: Trip.where(@query, @date_range_start, @date_range_end).count,
+        iTotalRecords: Trip.where(@query, @end_date).count,
         iTotalDisplayRecords: trips.total_entries,
         aaData: data
     }
@@ -62,18 +61,18 @@ class DriversHistoryDatatable
   def fetch_trips_helper(sort_column, sort_direction)
 
     #默认按归来时间排序
-    trips = Trip.includes(:destination, :drivership => [:car, :driver]).where(@query, @date_range_start, @date_range_end).order("back_time desc")
+    trips = Trip.includes(:destination, :drivership => [:car, :driver]).where(@query, @end_date).order("back_time desc")
 
     case sort_column
 
       when "departure_time", "back_time"
-        trips = Trip.includes(:destination, :drivership => [:car, :driver]).where(@query, @date_range_start, @date_range_end).order("#{sort_column} #{sort_direction}")
+        trips = Trip.includes(:destination, :drivership => [:car, :driver]).where(@query, @end_date).order("#{sort_column} #{sort_direction}")
       when "plate"
-        trips = Trip.includes(:destination, :drivership => [:car, :driver]).where(@query, @date_range_start, @date_range_end).order("cars.plate #{sort_direction}")
+        trips = Trip.includes(:destination, :drivership => [:car, :driver]).where(@query, @end_date).order("cars.plate #{sort_direction}")
       when "destination"
-        trips = Trip.includes(:destination, :drivership => [:car, :driver]).where(@query, @date_range_start, @date_range_end).order("destinations.name #{sort_direction}")  
+        trips = Trip.includes(:destination, :drivership => [:car, :driver]).where(@query, @end_date).order("destinations.name #{sort_direction}")  
       when "driver"
-        trips = Trip.includes(:destination, :drivership => [:car, :driver]).where(@query, @date_range_start, @date_range_end).order("users.name #{sort_direction}")
+        trips = Trip.includes(:destination, :drivership => [:car, :driver]).where(@query, @end_date).order("users.name #{sort_direction}")
 
     end
 

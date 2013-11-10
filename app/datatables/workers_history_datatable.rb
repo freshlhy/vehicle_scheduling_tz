@@ -6,15 +6,14 @@ class WorkersHistoryDatatable
 
   def initialize(view)
     @view = view
-    @date_range_start = Date.today.years_ago(1).at_beginning_of_year()
-    @date_range_end = Date.today.years_ago(1).end_of_year()
-    @query = "departure_time >= ? AND departure_time <= ?"
+    @end_date = Date.today.at_beginning_of_year()
+    @query = "departure_time < ?"
   end
 
   def as_json(options = {})
     {
         sEcho: params[:sEcho].to_i,
-        iTotalRecords: Trip.where(@query, @date_range_start, @date_range_end).count,
+        iTotalRecords: Trip.where(@query, @end_date).count,
         iTotalDisplayRecords: trips.total_entries,
         aaData: data
     }
@@ -65,15 +64,15 @@ class WorkersHistoryDatatable
   def fetch_trips_helper(sort_column, sort_direction)
 
     #默认按归来时间排序
-    trips = Trip.includes(:destination, :note).where(@query, @date_range_start, @date_range_end)
+    trips = Trip.includes(:destination, :note).where(@query, @end_date)
       .order("back_time desc")
 
     case sort_column
 
       when "departure_time", "back_time"
-        trips = Trip.includes(:destination, :note).where(@query, @date_range_start, @date_range_end).order("#{sort_column} #{sort_direction}")
+        trips = Trip.includes(:destination, :note).where(@query, @end_date).order("#{sort_column} #{sort_direction}")
       when "note", "destination"
-        trips = Trip.includes(:destination, :note).where(@query, @date_range_start, @date_range_end).order("#{sort_column}s.name #{sort_direction}")
+        trips = Trip.includes(:destination, :note).where(@query, @end_date).order("#{sort_column}s.name #{sort_direction}")
     end
 
     trips

@@ -16,6 +16,9 @@ class Trip < ActiveRecord::Base
   validate :back_time_is_date?
   validates :back_time, :date => {:after_or_equal_to => :departure_time, :message => '归来时间必须在出发时间之后'}
 
+
+  scope :active, -> { where(ing: true) }
+
   belongs_to :drivership
   belongs_to :destination
   belongs_to :note

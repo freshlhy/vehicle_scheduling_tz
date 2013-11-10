@@ -119,7 +119,7 @@ namespace :db do
     end
 
     # 司机和车辆配对
-    (1..50).each do |item|
+    (1..500).each do |item|
       Drivership.create!(car_id: rand(1..17), driver_id: rand(113..131))
     end
 
@@ -150,7 +150,7 @@ namespace :db do
     (1..100).each do |i|
       dt = Date.new(2012,1,1) + (365*rand())
       bt = dt + rand(1..5)
-      trip = Trip.create!(drivership_id: rand(1..50),
+      trip = Trip.create!(drivership_id: rand(1..500),
                     destination_id: rand(1..16),
                     mileage: rand(5..350),
                     departure_time: dt,
@@ -170,7 +170,7 @@ namespace :db do
     (1..100).each do |i|
       dt = Date.new(2013,1,1) + ((days -6)*rand())
       bt = dt + rand(1..5)
-      trip = Trip.create!(drivership_id: rand(1..50),
+      trip = Trip.create!(drivership_id: rand(1..500),
                     destination_id: rand(1..16),
                     mileage: rand(5..350),
                     departure_time: dt,
@@ -195,7 +195,7 @@ namespace :db do
       kdays = rand(0..5)   
       bt = Date.today + kdays
       dt = bt - rand(kdays..(kdays + 5))
-      r_drivership_id = rand(1..50)
+      r_drivership_id = rand(1..500)
 
       trip = Trip.create!(drivership_id: r_drivership_id,
                     destination_id: rand(1..16),

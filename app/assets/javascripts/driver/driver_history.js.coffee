@@ -26,6 +26,16 @@ jQuery ->
       "sSearch": "按时间搜索:"
     }
 
+    "aoColumns": [
+      { "sWidth": "65px", "aTargets": [ 0 ] },
+      { "sWidth": "40px", "aTargets": [ 1 ] },
+      { "sWidth": "145px", "aTargets": [ 2 ] },
+      { "sWidth": "50px", "aTargets": [ 3 ] },
+      { "sWidth": "65px", "aTargets": [ 4 ] },
+      { "sWidth": "65px", "aTargets": [ 5 ] },
+      { "sWidth": "25px", "aTargets": [ 6 ] }
+    ]
+
     #首次打开默认以第六列排序
     "aaSorting": [[ 4, "desc" ]]
 
