@@ -1,3 +1,4 @@
+require 'date'
 class AddSinceToUsers < ActiveRecord::Migration
   def change
     add_column :users, :since, :date

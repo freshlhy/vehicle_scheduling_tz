@@ -28,12 +28,12 @@ ActiveRecord::Schema.define(:version => 20131107121219) do
   create_table "cars", :force => true do |t|
     t.string   "model"
     t.string   "plate"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.integer  "current_trip", :default => 0
     t.integer  "load_limit"
     t.date     "since"
-    t.float    "age"
+    t.float    "age",          :default => 0.0
   end
 
   create_table "destinations", :force => true do |t|
@@ -45,10 +45,10 @@ ActiveRecord::Schema.define(:version => 20131107121219) do
   create_table "driver_stats", :force => true do |t|
     t.integer  "driver_id"
     t.float    "driver_age"
-    t.integer  "trip_count"
-    t.integer  "accident_count"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.integer  "trip_count",     :default => 0
+    t.integer  "accident_count", :default => 0
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "driverships", :force => true do |t|
@@ -76,10 +76,10 @@ ActiveRecord::Schema.define(:version => 20131107121219) do
   create_table "parts", :force => true do |t|
     t.string   "name"
     t.string   "model"
-    t.integer  "rating_mileage"
-    t.integer  "rating_life"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.integer  "rating_mileage", :default => 0
+    t.integer  "rating_life",    :default => 0
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "plms", :force => true do |t|
@@ -98,15 +98,15 @@ ActiveRecord::Schema.define(:version => 20131107121219) do
     t.integer  "part_id"
     t.integer  "car_id"
     t.date     "start"
-    t.integer  "current_mileage"
-    t.integer  "current_life"
+    t.integer  "current_mileage",      :default => 0
+    t.integer  "current_life",         :default => 0
     t.string   "mileage_status"
     t.string   "life_status"
     t.string   "is_active"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
-    t.float    "mileage_status_value"
-    t.float    "life_status_value"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+    t.float    "mileage_status_value", :default => 0.0
+    t.float    "life_status_value",    :default => 0.0
   end
 
   create_table "trip_users", :force => true do |t|
@@ -129,20 +129,20 @@ ActiveRecord::Schema.define(:version => 20131107121219) do
     t.string   "workers_ids"
     t.boolean  "ing",            :default => false
     t.string   "workers_names"
-    t.integer  "mileage"
+    t.integer  "mileage",        :default => 0
   end
 
   create_table "users", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.string   "password_digest"
     t.string   "remember_token"
     t.integer  "current_trip",    :default => 0
     t.string   "phone"
     t.integer  "group_id"
     t.string   "type"
-    t.string   "gender"
+    t.string   "gender",          :default => "男"
     t.string   "licence_id"
     t.date     "since"
   end

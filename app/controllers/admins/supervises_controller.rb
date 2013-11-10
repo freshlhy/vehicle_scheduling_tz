@@ -54,12 +54,12 @@ module Admins
 
       if is_integer(params[:supervise][:current_mileage])
         params[:supervise][:mileage_status] = params[:supervise][:current_mileage].to_s + "/" + @supervise.part.rating_mileage.to_s
-        params[:supervise][:mileage_status_value] = Integer(params[:supervise][:current_mileage]) / @supervise.part.rating_mileage
+        params[:supervise][:mileage_status_value] = (Integer(params[:supervise][:current_mileage]) / @supervise.part.rating_mileage.to_f).round(3)
       end
 
       if is_integer(params[:supervise][:current_life])
         params[:supervise][:life_status] = params[:supervise][:current_life].to_s + "/" + @supervise.part.rating_life.to_s
-        params[:supervise][:life_status_value] = Integer(params[:supervise][:current_life]) / @supervise.part.rating_life
+        params[:supervise][:life_status_value] = (Integer(params[:supervise][:current_life]) / @supervise.part.rating_life.to_f).round(3)
       end
 
       if @supervise.update_attributes(params[:supervise]) 
