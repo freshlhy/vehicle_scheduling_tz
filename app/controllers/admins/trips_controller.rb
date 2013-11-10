@@ -29,6 +29,10 @@ module Admins
     def update
 
       @trip = Trip.find(params[:id])
+
+      # 更新之前先重置统计
+      stat(@trip, "del")
+
       car = @trip.car
       driver = @trip.driver
       if @trip.ing
@@ -103,9 +107,17 @@ module Admins
       respond_to do |format|
         format.html do
           if params[:workers_ids_] and params[:workers_ids_].size > 0 and @trip.errors.empty? and @trip.save
+
+            # 重新统计
+            stat(@trip)
+
             flash[:success] = "修改已保存！"
             redirect_to edit_admins_trip_path(@trip)
           else
+
+            # 重新统计原纪录
+            stat(params[:id])
+
             @cars = Car.order("model").all
             @drivers = Driver.order("group_id").all
             if @trip.ing
@@ -128,6 +140,8 @@ module Admins
     # DELETE /trips/1.json
     def destroy
       @trip = Trip.find(params[:id])
+
+      stat(@trip, "del")
 
       if @trip.ing
         trip_user_delete(@trip.driver)

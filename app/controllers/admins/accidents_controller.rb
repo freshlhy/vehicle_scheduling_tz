@@ -13,6 +13,7 @@ module Admins
       @accident = Accident.new(params[:accident])
 
       if @accident.save
+        accident_stat(@accident)
         flash[:success] = "事故已添加！"
         redirect_to admins_accidents_path
       else
@@ -35,10 +36,13 @@ module Admins
 
     def update
       @accident = Accident.find(params[:id])
+      accident_stat(@accident, "del")
       if @accident.update_attributes(params[:accident])
+        accident_stat(@accident)
         flash[:success] = "该事故记录已更新！"
         redirect_to '/admins/accidents'
       else
+        accident_stat(params[:id])
         @cars = Car.order("model").all
         @drivers = Driver.order("name").all
         render 'edit'
@@ -48,6 +52,8 @@ module Admins
 
     def destroy
       @accident = Accident.find(params[:id])
+
+      accident_stat(@accident, "del")
 
       @accident.destroy
 

@@ -21,7 +21,7 @@ class PlmsDatatable
   def data
     plms.map do |plm|
       [
-          h(plm.car.plate),
+          h(plm.car.model_plate),
           h(plm.plm_type),
           h(plm.value),
           h(plm.start),

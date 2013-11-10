@@ -6,7 +6,7 @@ require 'date'
 # puts Date.today-(365*rand())
 
 
-# dt = Date.new(2012,1,1)+(365*rand())
+# dt = Date.new(2012,1,1)+(545*rand())
 # bt = dt + rand(1..5)
 
 # kdays = rand(0..5)   
@@ -14,6 +14,13 @@ require 'date'
 # dt = bt - rand(kdays..(kdays + 5))
 # puts dt
 # puts bt
+
+# (1..17).each do |k|
+# 	puts Date.new(2012,1,1)+(545*rand())
+# end
+# type = "aadd"
+# puts type.eql?("add")
+
 
 
 # (1..10).each 
@@ -30,8 +37,27 @@ require 'date'
 
 # puts (12/67.to_f).round(1)
 
+arrs = ["月度", "季度", "年度"]
+(1..20).each do |k|
+	arr = arrs.shuffle.first
+	d = Date.new(2012,1,1) + 365*rand()
+	t = d
+	while true
+		if arr.eql?("月度")
+			n = t + 30
+		elsif arr.eql?("季度")
+			n = t + 90
+		else
+			n = t + 360
+		end
+		p = t
+		t = n 
+		break if n.mjd > Date.today.mjd 
+	end
 
-
+	puts arr + "\t" + d.to_s + "\t" + p.to_s + "\t" + n.to_s
+ 
+end
 
 # puts rand(20..30)
 
@@ -85,7 +111,8 @@ require 'date'
 
 # puts Date.today.mjd - Date.new(2013,11,7).mjd + 1
 # (1..17).each do |n|
-# 	puts Date.new(2005,1,1) + (365*7*rand())
+# 	d = Date.new(2012,1,1) + (365*1.5*rand())
+# 	puts d + "\t" + (d+)
 # end
 
 # def datapath filename
@@ -113,9 +140,9 @@ require 'date'
 # end
 
 
-i = 3
+# i = 3
 
-i += (6 - 1)
+# i += (6 - 1)
 
-puts i
+# puts i
 

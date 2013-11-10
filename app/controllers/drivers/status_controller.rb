@@ -108,7 +108,10 @@ module Drivers
                 trip_user_delete(worker)
               }
               @trip.save
-              stat(@trip.id)
+              
+              # 统计
+              stat(@trip)
+
               sign_in(current_user)
               redirect_to '/drivers/start'
             else

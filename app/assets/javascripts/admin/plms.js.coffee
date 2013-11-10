@@ -25,13 +25,13 @@ jQuery ->
 
     "bAutoWidth": false,
     "aoColumns": [
-      { "sWidth": "65px", "aTargets": [ 0 ] },
+      { "sWidth": "95px", "aTargets": [ 0 ] },
       { "sWidth": "65px", "aTargets": [ 1 ] },
-      { "sWidth": "65px", "aTargets": [ 2 ] },
+      { "sWidth": "55px", "aTargets": [ 2 ] },
       { "sWidth": "65px", "aTargets": [ 3 ] },
       { "sWidth": "70px", "aTargets": [ 4 ] },
       { "sWidth": "65px", "aTargets": [ 5 ] },
-      { "sWidth": "65px", "aTargets": [ 6 ] },
+      { "sWidth": "55px", "aTargets": [ 6 ] },
       { "sWidth": "28px", "aTargets": [ 7 ] }
     ]
     "oTableTools": {

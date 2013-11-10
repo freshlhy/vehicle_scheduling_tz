@@ -125,6 +125,10 @@ module Drivers
    def update
 
       @trip = Trip.find(params[:id])
+
+      # 更新之前先重置统计
+      stat(@trip, "del")
+
       car = @trip.car
       driver = current_user
 
@@ -198,9 +202,15 @@ module Drivers
       respond_to do |format|
         format.html do
           if params[:workers_ids_] and params[:workers_ids_].size > 0 and @trip.errors.empty? and @trip.save
+            # 重新统计
+            stat(@trip)
             flash[:success] = "修改已保存！"
             redirect_to '/drivers/trips/'+@trip.id.to_s+'/edit'
           else
+            
+            # 重新统计原纪录
+            stat(params[:id])
+
             @cars = Car.order("model").all
             if @trip.ing
               @cars = Car.where("current_trip = ? OR current_trip = ?", @trip.id, 0).order("model").all
@@ -222,6 +232,9 @@ module Drivers
     def destroy
 
       @trip = Trip.find(params[:id])
+
+      stat(@trip, "del")
+
       ing = @trip.ing
       if ing
         trip_user_delete(@trip.driver)
