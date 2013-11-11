@@ -47,7 +47,9 @@ class SupervisesDatatable
     if params[:sSearch].present?
       supervises = supervises.where("
         parts.name like :search or
+        parts.model like :search or
         cars.plate like :search or
+        cars.model like :search or
         start like :search or
         mileage_status like :search or
         life_status like :search or
